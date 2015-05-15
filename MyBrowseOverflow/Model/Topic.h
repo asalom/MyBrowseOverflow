@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Question;
 
 @interface Topic : NSObject
 - (id)initWithName:(NSString *)newName tag:(NSString *)newTag;
+- (void)addQuestion:(Question *)question;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *tag;

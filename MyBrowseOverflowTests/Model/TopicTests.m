@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "Topic.h"
+#import "Question.h"
 
 @interface TopicTests : XCTestCase
 
@@ -42,6 +43,16 @@
 
 - (void)testForAListOfQuestions {
     XCTAssertTrue([_topic.recentQuestions isKindOfClass:[NSArray class]], @"Topics should provide a list of recentQuestions");
+}
+
+- (void)testForInitiallyEmptyQuestionList {
+    XCTAssertEqual(_topic.recentQuestions.count, 0, @"The question list should be empty initially");
+}
+
+- (void)testAddingAQuestionToTheList {
+    Question *question = [[Question alloc] init];
+    [_topic addQuestion:question];
+    XCTAssertEqual(_topic.recentQuestions.count, 1, @"Add a question, and the count of questions should go up");
 }
 
 @end

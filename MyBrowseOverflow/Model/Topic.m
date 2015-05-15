@@ -9,9 +9,10 @@
 #import "Topic.h"
 #import "Question.h"
 
-@implementation Topic
+@implementation Topic {
+    NSArray *questions;
+}
 
-@synthesize recentQuestions = _recentQuestions;
 
 - (instancetype)initWithName:(NSString *)newName tag:(NSString *)newTag;
 {
@@ -19,14 +20,17 @@
     if (self) {
         _name = [newName copy];
         _tag = [newTag copy];
-        _recentQuestions = [[NSArray alloc] init];
+        questions = [[NSArray alloc] init];
     }
     return self;
 }
 
 - (void)addQuestion:(Question *)question {
-    _recentQuestions = [_recentQuestions arrayByAddingObject:question];
+    questions = [questions arrayByAddingObject:question];
 }
 
+- (NSArray *)recentQuestions {
+    return questions;
+}
 
 @end

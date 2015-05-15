@@ -30,7 +30,9 @@
 }
 
 - (NSArray *)recentQuestions {
-    return questions;
+    return [questions sortedArrayUsingComparator:^(Question *question1, Question *question2) {
+        return [question2.date compare:question1.date];
+    }];
 }
 
 @end

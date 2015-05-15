@@ -4,4 +4,7 @@
    <FileRef
       location = "self:MyBrowseOverflow.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../README.md">
+   </FileRef>
 </Workspace>

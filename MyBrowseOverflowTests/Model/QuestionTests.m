@@ -23,6 +23,11 @@
     _question = [[Question alloc] initWithTitle:@"Do iPhones also dream of electric sheep?" date:[NSDate distantPast] score:42];
 }
 
+- (void)tearDown {
+    _question = nil;
+    [super tearDown];
+}
+
 - (void)testQuestionHasADate {
     XCTAssertEqualObjects(_question.date, [NSDate distantPast], @"Question needs to provide its date");
 }

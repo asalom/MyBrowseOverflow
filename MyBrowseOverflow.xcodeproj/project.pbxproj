@@ -18,6 +18,8 @@
 		3F1757771B0625DF0085EFA8 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757761B0625DF0085EFA8 /* Topic.m */; };
 		3F17577A1B06366C0085EFA8 /* QuestionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757791B06366C0085EFA8 /* QuestionTests.m */; };
 		3F17577D1B0636E50085EFA8 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577C1B0636E50085EFA8 /* Question.m */; };
+		3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577E1B063C6B0085EFA8 /* PersonTests.m */; };
+		3F1757821B063C700085EFA8 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757811B063C700085EFA8 /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,9 @@
 		3F1757791B06366C0085EFA8 /* QuestionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTests.m; sourceTree = "<group>"; };
 		3F17577B1B0636E50085EFA8 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		3F17577C1B0636E50085EFA8 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		3F17577E1B063C6B0085EFA8 /* PersonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTests.m; sourceTree = "<group>"; };
+		3F1757801B063C700085EFA8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		3F1757811B063C700085EFA8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +145,7 @@
 			children = (
 				3F1757731B06256E0085EFA8 /* TopicTests.m */,
 				3F1757791B06366C0085EFA8 /* QuestionTests.m */,
+				3F17577E1B063C6B0085EFA8 /* PersonTests.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -151,6 +157,8 @@
 				3F1757761B0625DF0085EFA8 /* Topic.m */,
 				3F17577B1B0636E50085EFA8 /* Question.h */,
 				3F17577C1B0636E50085EFA8 /* Question.m */,
+				3F1757801B063C700085EFA8 /* Person.h */,
+				3F1757811B063C700085EFA8 /* Person.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 			files = (
 				3F17574E1B0610AC0085EFA8 /* AppDelegate.m in Sources */,
 				3F1757511B0610AC0085EFA8 /* MasterViewController.m in Sources */,
+				3F1757821B063C700085EFA8 /* Person.m in Sources */,
 				3F17574B1B0610AC0085EFA8 /* main.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
 				3F1757771B0625DF0085EFA8 /* Topic.m in Sources */,
@@ -268,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */,
 				3F1757741B06256E0085EFA8 /* TopicTests.m in Sources */,
 				3F17577A1B06366C0085EFA8 /* QuestionTests.m in Sources */,
 			);

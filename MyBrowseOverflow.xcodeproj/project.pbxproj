@@ -14,7 +14,6 @@
 		3F1757571B0610AC0085EFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1757551B0610AC0085EFA8 /* Main.storyboard */; };
 		3F1757591B0610AC0085EFA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1757581B0610AC0085EFA8 /* Images.xcassets */; };
 		3F17575C1B0610AC0085EFA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F17575A1B0610AC0085EFA8 /* LaunchScreen.xib */; };
-		3F1757681B0610AC0085EFA8 /* MyBrowseOverflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757671B0610AC0085EFA8 /* MyBrowseOverflowTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +41,6 @@
 		3F17575B1B0610AC0085EFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3F1757611B0610AC0085EFA8 /* MyBrowseOverflowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyBrowseOverflowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1757661B0610AC0085EFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F1757671B0610AC0085EFA8 /* MyBrowseOverflowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBrowseOverflowTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +108,6 @@
 		3F1757641B0610AC0085EFA8 /* MyBrowseOverflowTests */ = {
 			isa = PBXGroup;
 			children = (
-				3F1757671B0610AC0085EFA8 /* MyBrowseOverflowTests.m */,
 				3F1757651B0610AC0085EFA8 /* Supporting Files */,
 			);
 			path = MyBrowseOverflowTests;
@@ -235,7 +232,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F1757681B0610AC0085EFA8 /* MyBrowseOverflowTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

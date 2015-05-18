@@ -423,6 +423,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyBrowseOverflowTests/MyBrowseOverflowTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -444,6 +445,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyBrowseOverflowTests/MyBrowseOverflowTests-Prefix.pch";
 				INFOPLIST_FILE = MyBrowseOverflowTests/Info.plist;

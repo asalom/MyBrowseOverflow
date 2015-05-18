@@ -9,8 +9,10 @@
 #import "Topic.h"
 #import "Question.h"
 
+static NSUInteger const MAXIMUM_NUMBER_OF_QUESTIONS = 20;
+
 @implementation Topic {
-    NSArray *questions;
+    NSArray *_questions;
 }
 
 
@@ -20,20 +22,29 @@
     if (self) {
         _name = [newName copy];
         _tag = [newTag copy];
-        questions = [[NSArray alloc] init];
+        _questions = [[NSArray alloc] init];
     }
     return self;
 }
 
 - (void)addQuestion:(Question *)question {
-    questions = [questions arrayByAddingObject:question];
+    NSArray *newQuestions = [_questions arrayByAddingObject:question];
+    if (newQuestions.count > MAXIMUM_NUMBER_OF_QUESTIONS) {
+        newQuestions = [self sortQuestionsLatestFirst:newQuestions];
+        newQuestions = [newQuestions subarrayWithRange:NSMakeRange(0, MAXIMUM_NUMBER_OF_QUESTIONS)];
+    }
+    
+    _questions = newQuestions;
 }
 
 - (NSArray *)recentQuestions {
-    NSArray *sortedQuestions = [questions sortedArrayUsingComparator:^(Question *question1, Question *question2) {
+    return [self sortQuestionsLatestFirst:_questions];
+}
+
+- (NSArray *)sortQuestionsLatestFirst:(NSArray *)questionList {
+    return [questionList sortedArrayUsingComparator:^(Question *question1, Question *question2) {
         return [question2.date compare:question1.date];
     }];
-    return sortedQuestions.count <= 20 ? sortedQuestions : [sortedQuestions subarrayWithRange:NSMakeRange(0, 20)];
 }
 
 @end

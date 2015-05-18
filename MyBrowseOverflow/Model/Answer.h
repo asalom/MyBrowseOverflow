@@ -13,7 +13,7 @@
 @property (copy) NSString *text;
 @property (strong) Person *person;
 @property NSInteger score;
-@property BOOL accepted;
+@property (getter=isAccepted) BOOL accepted;
 
 - (id)initWithText:(NSString *)text person:(Person *)person score:(NSInteger)score;
 - (NSComparisonResult)compare:(Answer *)otherAnswer;

@@ -61,8 +61,14 @@
 }
 
 - (void)testAcceptedAnswerIsFirst {
-    XCTAssertTrue([_question.answers[0] accepted], @"Accepted answer comes first");
+    XCTAssertTrue([_question.answers[0] isAccepted], @"Accepted answer comes first");
 }
 
+- (void)testHighScoreAnswerBeforeLow {
+    NSArray *answers = _question.answers;
+    NSInteger highIndex = [answers indexOfObject:_highScore];
+    NSInteger lowIndex = [answers indexOfObject:_lowScore];
+    XCTAssertTrue(highIndex < lowIndex, @"High-scoring answer comes first");
+}
 
 @end

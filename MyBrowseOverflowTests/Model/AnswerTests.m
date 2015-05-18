@@ -64,4 +64,10 @@
     XCTAssertEqual([_otherAnswer compare:_answer], NSOrderedSame, @"Both answers of equal rank");
 }
 
+- (void)testLowerScoringAnswerComesAfterHigher {
+    _otherAnswer.score = _answer.score + 10;
+    XCTAssertEqual([_answer compare:_otherAnswer], NSOrderedDescending, @"Higher score comes first");
+    XCTAssertEqual([_otherAnswer compare:_answer], NSOrderedAscending, @"Lower score comes last");
+}
+
 @end

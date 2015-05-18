@@ -3,4 +3,4 @@ xcode_project: MyBrowseOverflow.xcodeproj # path to your xcodeproj folder
 xcode_scheme: MyBrowseOverflowTests
 xcode_sdk: iphonesimulator
 after_success:
-  - coveralls
+  - coverage_service: coveralls

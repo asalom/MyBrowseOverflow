@@ -58,13 +58,21 @@
 - (void)testQuestionsAreListedChronologically {
     Question *q1 = [[Question alloc] initWithTitle:nil date:[NSDate distantPast] score:0];
     Question *q2 = [[Question alloc] initWithTitle:nil date:[NSDate distantFuture] score:0];
-    [_topic addQuestion:q1];
     [_topic addQuestion:q2];
+    [_topic addQuestion:q1];
     
     NSArray *questions = _topic.recentQuestions;
     Question *listedFirst = questions[0];
     Question *listedSecond = questions[1];
     XCTAssertEqualObjects([listedFirst.date laterDate:listedSecond.date], listedFirst.date, @"The later question should appear first in the list");
+}
+
+- (void)testLimitOfTwentyQuestions {
+    Question *q1 = [[Question alloc] init];
+    for (NSInteger i = 0; i < 25; i++) {
+        [_topic addQuestion:q1];
+    }
+    XCTAssertTrue(_topic.recentQuestions.count <= 20, @"There should never be more than twenty questions");
 }
 
 @end

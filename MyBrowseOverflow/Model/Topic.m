@@ -30,9 +30,10 @@
 }
 
 - (NSArray *)recentQuestions {
-    return [questions sortedArrayUsingComparator:^(Question *question1, Question *question2) {
+    NSArray *sortedQuestions = [questions sortedArrayUsingComparator:^(Question *question1, Question *question2) {
         return [question2.date compare:question1.date];
     }];
+    return sortedQuestions.count <= 20 ? sortedQuestions : [sortedQuestions subarrayWithRange:NSMakeRange(0, 20)];
 }
 
 @end

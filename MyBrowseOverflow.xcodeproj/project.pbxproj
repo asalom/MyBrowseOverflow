@@ -20,6 +20,8 @@
 		3F17577D1B0636E50085EFA8 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577C1B0636E50085EFA8 /* Question.m */; };
 		3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577E1B063C6B0085EFA8 /* PersonTests.m */; };
 		3F1757821B063C700085EFA8 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757811B063C700085EFA8 /* Person.m */; };
+		3FC6D2741B09FC520013A0A2 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2731B09FC520013A0A2 /* Answer.m */; };
+		3FC6D2761B09FC5B0013A0A2 /* AnswerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2751B09FC5B0013A0A2 /* AnswerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,9 @@
 		3F17577E1B063C6B0085EFA8 /* PersonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTests.m; sourceTree = "<group>"; };
 		3F1757801B063C700085EFA8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3F1757811B063C700085EFA8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		3FC6D2721B09FC520013A0A2 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		3FC6D2731B09FC520013A0A2 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
+		3FC6D2751B09FC5B0013A0A2 /* AnswerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +151,7 @@
 				3F1757731B06256E0085EFA8 /* TopicTests.m */,
 				3F1757791B06366C0085EFA8 /* QuestionTests.m */,
 				3F17577E1B063C6B0085EFA8 /* PersonTests.m */,
+				3FC6D2751B09FC5B0013A0A2 /* AnswerTests.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 				3F17577C1B0636E50085EFA8 /* Question.m */,
 				3F1757801B063C700085EFA8 /* Person.h */,
 				3F1757811B063C700085EFA8 /* Person.m */,
+				3FC6D2721B09FC520013A0A2 /* Answer.h */,
+				3FC6D2731B09FC520013A0A2 /* Answer.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				3F17574E1B0610AC0085EFA8 /* AppDelegate.m in Sources */,
 				3F1757511B0610AC0085EFA8 /* MasterViewController.m in Sources */,
 				3F1757821B063C700085EFA8 /* Person.m in Sources */,
+				3FC6D2741B09FC520013A0A2 /* Answer.m in Sources */,
 				3F17574B1B0610AC0085EFA8 /* main.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
 				3F1757771B0625DF0085EFA8 /* Topic.m in Sources */,
@@ -280,6 +289,7 @@
 				3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */,
 				3F1757741B06256E0085EFA8 /* TopicTests.m in Sources */,
 				3F17577A1B06366C0085EFA8 /* QuestionTests.m in Sources */,
+				3FC6D2761B09FC5B0013A0A2 /* AnswerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

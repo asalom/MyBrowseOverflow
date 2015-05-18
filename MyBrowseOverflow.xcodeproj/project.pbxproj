@@ -25,6 +25,8 @@
 		3FC6D2791B0A1F120013A0A2 /* QuestionCreationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2781B0A1F120013A0A2 /* QuestionCreationTests.m */; };
 		3FC6D27D1B0A1F4F0013A0A2 /* StackOverflowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D27C1B0A1F4F0013A0A2 /* StackOverflowManager.m */; };
 		3FC6D2821B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2811B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m */; };
+		3FC6D2851B0A24470013A0A2 /* StackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2841B0A24470013A0A2 /* StackOverflowCommunicator.m */; };
+		3FC6D2881B0A245C0013A0A2 /* MockStackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2871B0A245C0013A0A2 /* MockStackOverflowCommunicator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,10 @@
 		3FC6D27E1B0A20360013A0A2 /* StackOverflowManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StackOverflowManagerDelegate.h; sourceTree = "<group>"; };
 		3FC6D2801B0A22510013A0A2 /* MockStackOverflowManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackOverflowManagerDelegate.h; sourceTree = "<group>"; };
 		3FC6D2811B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackOverflowManagerDelegate.m; sourceTree = "<group>"; };
+		3FC6D2831B0A24470013A0A2 /* StackOverflowCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackOverflowCommunicator.h; sourceTree = "<group>"; };
+		3FC6D2841B0A24470013A0A2 /* StackOverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackOverflowCommunicator.m; sourceTree = "<group>"; };
+		3FC6D2861B0A245C0013A0A2 /* MockStackOverflowCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockStackOverflowCommunicator.h; sourceTree = "<group>"; };
+		3FC6D2871B0A245C0013A0A2 /* MockStackOverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackOverflowCommunicator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +203,8 @@
 				3FC6D27B1B0A1F4F0013A0A2 /* StackOverflowManager.h */,
 				3FC6D27C1B0A1F4F0013A0A2 /* StackOverflowManager.m */,
 				3FC6D27E1B0A20360013A0A2 /* StackOverflowManagerDelegate.h */,
+				3FC6D2831B0A24470013A0A2 /* StackOverflowCommunicator.h */,
+				3FC6D2841B0A24470013A0A2 /* StackOverflowCommunicator.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -206,6 +214,8 @@
 			children = (
 				3FC6D2801B0A22510013A0A2 /* MockStackOverflowManagerDelegate.h */,
 				3FC6D2811B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m */,
+				3FC6D2861B0A245C0013A0A2 /* MockStackOverflowCommunicator.h */,
+				3FC6D2871B0A245C0013A0A2 /* MockStackOverflowCommunicator.m */,
 			);
 			path = Mocking;
 			sourceTree = "<group>";
@@ -313,6 +323,7 @@
 				3F17574E1B0610AC0085EFA8 /* AppDelegate.m in Sources */,
 				3F1757511B0610AC0085EFA8 /* MasterViewController.m in Sources */,
 				3F1757821B063C700085EFA8 /* Person.m in Sources */,
+				3FC6D2851B0A24470013A0A2 /* StackOverflowCommunicator.m in Sources */,
 				3FC6D2741B09FC520013A0A2 /* Answer.m in Sources */,
 				3F17574B1B0610AC0085EFA8 /* main.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
@@ -332,6 +343,7 @@
 				3F17577A1B06366C0085EFA8 /* QuestionTests.m in Sources */,
 				3FC6D2761B09FC5B0013A0A2 /* AnswerTests.m in Sources */,
 				3FC6D2821B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m in Sources */,
+				3FC6D2881B0A245C0013A0A2 /* MockStackOverflowCommunicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

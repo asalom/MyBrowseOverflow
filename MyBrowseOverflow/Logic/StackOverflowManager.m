@@ -7,6 +7,8 @@
 //
 
 #import "StackOverflowManager.h"
+#import "StackOverflowCommunicator.h"
+#import "Topic.h"
 
 @implementation StackOverflowManager
 
@@ -20,6 +22,10 @@
     }
     
     _delegate = newDelegate;
+}
+
+- (void)fetchQuestionsOnTopic:(Topic *)topic {
+    [self.communicator searchForQuestionsWithTag:topic.tag];
 }
 
 @end

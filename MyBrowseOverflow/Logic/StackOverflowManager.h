@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "StackOverflowManagerDelegate.h"
+@class StackOverflowCommunicator;
+@class Topic;
 
 @interface StackOverflowManager : NSObject
 @property (assign, nonatomic) id<StackOverflowManagerDelegate> delegate;
+@property (strong) StackOverflowCommunicator *communicator;
+
+- (void)fetchQuestionsOnTopic:(Topic *)topic;
 @end

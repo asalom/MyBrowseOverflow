@@ -10,6 +10,8 @@
 #import <XCTest/XCTest.h>
 #import "StackOverflowManager.h"
 #import "MockStackOverflowManagerDelegate.h"
+#import "MockStackOverflowCommunicator.h"
+#import "Topic.h"
 
 @interface QuestionCreationTests : XCTestCase
 
@@ -40,6 +42,14 @@
 
 - (void)testManagerAcceptsNilAsDelegate {
     XCTAssertNoThrow(_manager.delegate = nil, @"Object confirming to the delegate protocol should be used");
+}
+
+- (void)testAskingForQuestionsMeansRequestingData {
+    MockStackOverflowCommunicator *communicator = [[MockStackOverflowCommunicator alloc] init];
+    _manager.communicator = communicator;
+    Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
+    [_manager fetchQuestionsOnTopic:topic];
+    XCTAssertTrue(communicator.wasAskedToFetchQuestions, @"The communicator should need to fetch data");
 }
 
 @end

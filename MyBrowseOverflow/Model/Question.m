@@ -9,28 +9,36 @@
 #import "Question.h"
 #import "Answer.h"
 
-@implementation Question
+@implementation Question {
+    NSMutableSet *_answerSet;
+}
 
-@synthesize answers     = _answers;
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _answerSet = [NSMutableSet set];
+    }
+    return self;
+}
 
 - (id)initWithTitle:(NSString *)title date:(NSDate *)date score:(NSInteger)score
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         _title = [title copy];
         _date = [date copy];
         _score = score;
-        _answers = [NSArray array];
     }
     return self;
 }
 
 - (void)addAnswer:(Answer *)answer {
-    _answers = [_answers arrayByAddingObject:answer];
+    [_answerSet addObject:answer];
 }
 
 - (NSArray *)answers {
-    return [_answers sortedArrayUsingSelector:@selector(compare:)];
+    return [_answerSet.allObjects sortedArrayUsingSelector:@selector(compare:)];
 }
 
 @end

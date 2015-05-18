@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "Question.h"
+#import "Answer.h"
 
 @interface QuestionTests : XCTestCase
 
@@ -16,15 +17,29 @@
 
 @implementation QuestionTests {
     Question *_question;
+    Answer *_lowScore;
+    Answer *_highScore;
 }
 
 - (void)setUp {
     [super setUp];
     _question = [[Question alloc] initWithTitle:@"Do iPhones also dream of electric sheep?" date:[NSDate distantPast] score:42];
+    
+    _lowScore = [[Answer alloc] init];
+    _lowScore.score = 1;
+    _lowScore.accepted = NO;
+    [_question addAnswer:_lowScore];
+    
+    _highScore = [[Answer alloc] init];
+    _highScore.accepted = YES;
+    _highScore.score = 4;
+    [_question addAnswer:_highScore];
 }
 
 - (void)tearDown {
     _question = nil;
+    _lowScore = nil;
+    _highScore = nil;
     [super tearDown];
 }
 
@@ -39,5 +54,15 @@
 - (void)testQuestionKeepsScore {
     XCTAssertEqual(_question.score, 42, @"Question needs to keep score");
 }
+
+- (void)testQuestionCanHaveAnswersAdded {
+    Answer *myAnswer = [[Answer alloc] init];
+    XCTAssertNoThrow([_question addAnswer:myAnswer], @"Must be able to add answers");
+}
+
+- (void)testAcceptedAnswerIsFirst {
+    XCTAssertTrue([_question.answers[0] accepted], @"Accepted answer comes first");
+}
+
 
 @end

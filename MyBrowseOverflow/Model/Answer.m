@@ -7,6 +7,7 @@
 //
 
 #import "Answer.h"
+#import "Person.h"
 
 @implementation Answer
 

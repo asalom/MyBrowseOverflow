@@ -2,5 +2,4 @@ language: objective-c
 xcode_project: MyBrowseOverflow.xcodeproj # path to your xcodeproj folder
 xcode_scheme: MyBrowseOverflowTests
 xcode_sdk: iphonesimulator
-after_success:
-  - coverage_service: coveralls
+after_success: coveralls

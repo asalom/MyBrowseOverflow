@@ -16,4 +16,5 @@
 @property BOOL accepted;
 
 - (id)initWithText:(NSString *)text person:(Person *)person score:(NSInteger)score;
+- (NSComparisonResult)compare:(Answer *)otherAnswer;
 @end

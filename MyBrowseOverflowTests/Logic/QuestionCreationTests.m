@@ -19,15 +19,24 @@
 
 @implementation QuestionCreationTests {
     StackOverflowManager *_manager;
+    MockStackOverflowManagerDelegate *_delegate;
+    NSError *_underlyingError;
 }
 
 - (void)setUp {
     [super setUp];
     _manager = [[StackOverflowManager alloc] init];
+    _delegate = [[MockStackOverflowManagerDelegate alloc] init];
+    _manager.delegate = _delegate;
+    _underlyingError = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
+    
 }
 
 - (void)tearDown {
     _manager = nil;
+    _manager.delegate = nil;
+    _delegate = nil;
+    _underlyingError = nil;
     [super tearDown];
 }
 
@@ -44,12 +53,23 @@
     XCTAssertNoThrow(_manager.delegate = nil, @"Object confirming to the delegate protocol should be used");
 }
 
+#pragma mark - Custom Mocks
 - (void)testAskingForQuestionsMeansRequestingData {
     MockStackOverflowCommunicator *communicator = [[MockStackOverflowCommunicator alloc] init];
     _manager.communicator = communicator;
     Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     [_manager fetchQuestionsOnTopic:topic];
     XCTAssertTrue(communicator.wasAskedToFetchQuestions, @"The communicator should need to fetch data");
+}
+
+- (void)testErrorReturnedToDelegateIsNotErrorNotifiedByCommunicator {
+    [_manager searchingForQuestionsFailedWithError:_underlyingError];
+    XCTAssertFalse(_underlyingError == [_delegate fetchError], @"Error should be at the correct level of abstraction");
+}
+
+- (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
+    [_manager searchingForQuestionsFailedWithError:_underlyingError];
+    XCTAssertEqualObjects([[[_delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], _underlyingError, @"The underlying error should be available to client code");
 }
 
 @end

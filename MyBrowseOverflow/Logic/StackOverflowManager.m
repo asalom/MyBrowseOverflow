@@ -10,6 +10,8 @@
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
 
+static NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
+
 @implementation StackOverflowManager
 
 @synthesize delegate    = _delegate;
@@ -26,6 +28,12 @@
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic {
     [self.communicator searchForQuestionsWithTag:topic.tag];
+}
+
+- (void)searchingForQuestionsFailedWithError:(NSError *)error {
+    NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
+    NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError code:StackOverflowManagerErrorQuestionSearchCode userInfo:errorInfo];
+    [self.delegate fetchingQuestionsFailedWithError:reportableError];
 }
 
 @end

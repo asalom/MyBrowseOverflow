@@ -11,9 +11,16 @@
 @class StackOverflowCommunicator;
 @class Topic;
 
+static NSString * const StackOverflowManagerError;
+
+enum {
+    StackOverflowManagerErrorQuestionSearchCode
+};
+
 @interface StackOverflowManager : NSObject
 @property (assign, nonatomic) id<StackOverflowManagerDelegate> delegate;
 @property (strong) StackOverflowCommunicator *communicator;
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
+- (void)searchingForQuestionsFailedWithError:(NSError *)error;
 @end

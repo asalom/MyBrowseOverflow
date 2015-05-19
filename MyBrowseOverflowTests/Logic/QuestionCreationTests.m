@@ -93,6 +93,7 @@
     
     // then
     XCTAssertEqualObjects([questionBuilder json], @"Fake JSON");
+    _manager.questionBuilder = nil;
 }
 
 #pragma mark -- StackOverflowManagerDelegate

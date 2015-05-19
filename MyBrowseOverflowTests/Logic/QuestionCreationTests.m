@@ -76,8 +76,17 @@
 
 #pragma mark - OCMock
 - (void)testAskingForQuestionsMeansRequestingData_OCMock {
+    // when
+    Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     id communicatorMock = OCMClassMock([StackOverflowCommunicator class]);
-    //[communicatorMock stub] searchingForQuestionsFailedWithError:<#(NSError *)#>
+    _manager.communicator = communicatorMock;
+    [[communicatorMock expect] searchForQuestionsWithTag:topic.tag];
+    
+    // given
+    [_manager fetchQuestionsOnTopic:topic];
+    
+    // then
+    [communicatorMock verify];
 }
 
 @end

@@ -49,12 +49,12 @@
 }
 
 - (void)testAskingForQuestionsMeansRequestingData_OCMock {
-    // when
+    // given
     id communicatorMock = OCMClassMock([StackOverflowCommunicator class]);
     _manager.communicator = communicatorMock;
     OCMExpect([communicatorMock searchForQuestionsWithTag:nil]);
     
-    // given
+    // when
     [_manager fetchQuestionsOnTopic:nil];
     
     // then
@@ -62,10 +62,10 @@
 }
 
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByCommunicator {
-    // when
+    // given
     NSError *error = [NSError new];
     
-    // given
+    // when
     [_manager searchingForQuestionsFailedWithError:error];
     
     //then
@@ -73,10 +73,10 @@
 }
 
 - (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
-    // when
+    // given
     NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     
-    //given
+    // when
     [_manager searchingForQuestionsFailedWithError:error];
     
     // then
@@ -84,15 +84,16 @@
 }
 
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
-    // when
-    QuestionBuilder *questionBuilder = [[QuestionBuilder alloc] init];
-    _manager.questionBuilder = questionBuilder;
-    
     // given
+    id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
+    OCMStub([mockQuestionBuilder json]);
+    _manager.questionBuilder = mockQuestionBuilder;
+    
+    // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    XCTAssertEqualObjects([questionBuilder json], @"Fake JSON");
+    OCMVerify([mockQuestionBuilder setJson:@"Fake JSON"]);
     _manager.questionBuilder = nil;
 }
 

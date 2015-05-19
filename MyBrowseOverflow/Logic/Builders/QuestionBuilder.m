@@ -10,4 +10,8 @@
 
 @implementation QuestionBuilder
 
+- (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error {
+    return nil;
+}
+
 @end

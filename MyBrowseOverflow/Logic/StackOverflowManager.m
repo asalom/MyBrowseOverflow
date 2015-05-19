@@ -51,6 +51,10 @@ static NSString * const StackOverflowManagerError = @"StackOverflowManagerError"
     if (!questions) {
         [self tellDelegateAboutQuestionSearchError:error];
     }
+    
+    else {
+        [self.delegate didReceiveQuestions:questions];
+    }
 }
 
 #pragma mark Class Continuation

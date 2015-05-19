@@ -22,8 +22,9 @@
 
 @implementation QuestionCreationTests {
     StackOverflowManager *_manager;
-    NSError *_underlyingError;
+    NSError *_underlyingErrorFromDelegate;
     NSArray *_questionsArray;
+    NSArray *_receivedQuestionsArrayFromDelegate;
 }
 
 - (void)setUp {
@@ -37,7 +38,7 @@
 - (void)tearDown {
     _manager = nil;
     _manager.delegate = nil;
-    _underlyingError = nil;
+    _underlyingErrorFromDelegate = nil;
     _questionsArray = nil;
     [super tearDown];
 }
@@ -75,7 +76,7 @@
     [_manager searchingForQuestionsFailedWithError:error];
     
     //then
-    XCTAssertFalse(_underlyingError == error, @"Error should be at the correct level of abstraction");
+    XCTAssertFalse(_underlyingErrorFromDelegate == error, @"Error should be at the correct level of abstraction");
 }
 
 - (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
@@ -86,22 +87,10 @@
     [_manager searchingForQuestionsFailedWithError:error];
     
     // then
-    XCTAssertEqualObjects([[_underlyingError userInfo] objectForKey:NSUnderlyingErrorKey], error, @"The underlying error should be available to client code");
+    XCTAssertEqualObjects([[_underlyingErrorFromDelegate userInfo] objectForKey:NSUnderlyingErrorKey], error, @"The underlying error should be available to client code");
 }
 
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
-    // given
-    FakeQuestionBuilder *questionBuilder = [[FakeQuestionBuilder alloc] init];
-    _manager.questionBuilder = questionBuilder;
-    
-    // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
-    
-    // then
-    XCTAssertEqualObjects(questionBuilder.json, @"Fake JSON");
-}
-
-- (void)testQuestionJSONIsPassedToQuestionBuilder_OCMock {
     // given
     id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
     OCMExpect([mockQuestionBuilder questionsFromJson:@"Fake JSON" error:[OCMArg anyObjectRef]]);
@@ -124,14 +113,42 @@
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    XCTAssertNotNil(_underlyingError, @"The delegate should have found out about the error");
+    XCTAssertNotNil(_underlyingErrorFromDelegate, @"The delegate should have found out about the error");
 }
 
+- (void)testDelegateNotToldAboutErrorWhenQuestionsReceived {
+    // given
+    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
+    mockQuestionBuilder.arrayToReturn = _questionsArray;
+    _manager.questionBuilder = mockQuestionBuilder;
+    
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertNil(_underlyingErrorFromDelegate, @"No error should be reported");
+}
 
+- (void)testDelegateReceivesTheQuestionsDiscoveredByManager {
+    // given
+    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
+    mockQuestionBuilder.arrayToReturn = _questionsArray;
+    _manager.questionBuilder = mockQuestionBuilder;
+    
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, _questionsArray, @"The manager should have sent its questions to the delegate");
+}
 
 #pragma mark -- StackOverflowManagerDelegate
 - (void)fetchingQuestionsFailedWithError:(NSError *)error {
-    _underlyingError = error;
+    _underlyingErrorFromDelegate = error;
+}
+
+- (void)didReceiveQuestions:(NSArray *)questions {
+    _receivedQuestionsArrayFromDelegate = questions;
 }
 
 @end

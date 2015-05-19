@@ -8,6 +8,7 @@
 
 @protocol StackOverflowManagerDelegate <NSObject>
 
+- (void)didReceiveQuestions:(NSArray *)questions;
 - (void)fetchingQuestionsFailedWithError:(NSError *)error;
 
 @end

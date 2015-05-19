@@ -1,5 +1,6 @@
 language: objective-c
 before_install: gem install cocoapods slather -N
-podfile: Podfile
-script: xctool -project MyBrowseOverflow.xcodeproj -scheme MyBrowseOverflowTests -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean build test
+script: 
+	- pod install
+	- xctool -project MyBrowseOverflow.xcodeproj -scheme MyBrowseOverflowTests -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES clean build test
 after_success: slather

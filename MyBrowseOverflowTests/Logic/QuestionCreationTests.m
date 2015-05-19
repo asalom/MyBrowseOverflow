@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "StackOverflowManager.h"
+#import "StackOverflowCommunicator.h"
 #import "MockStackOverflowManagerDelegate.h"
 #import "MockStackOverflowCommunicator.h"
 #import "Topic.h"
+#import <OCMock/OCMock.h>
 
 @interface QuestionCreationTests : XCTestCase
 
@@ -70,6 +72,12 @@
 - (void)testErrorReturnedToDelegateDocumentsUnderlyingError {
     [_manager searchingForQuestionsFailedWithError:_underlyingError];
     XCTAssertEqualObjects([[[_delegate fetchError] userInfo] objectForKey:NSUnderlyingErrorKey], _underlyingError, @"The underlying error should be available to client code");
+}
+
+#pragma mark - OCMock
+- (void)testAskingForQuestionsMeansRequestingData_OCMock {
+    id communicatorMock = OCMClassMock([StackOverflowCommunicator class]);
+    //[communicatorMock stub] searchingForQuestionsFailedWithError:<#(NSError *)#>
 }
 
 @end

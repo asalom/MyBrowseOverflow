@@ -14,6 +14,7 @@
 #import "QuestionBuilder.h"
 #import "FakeQuestionBuilder.h"
 #import <OCMock/OCMock.h>
+#import "Question.h"
 
 @interface QuestionCreationTests : XCTestCase <StackOverflowManagerDelegate>
 
@@ -22,18 +23,22 @@
 @implementation QuestionCreationTests {
     StackOverflowManager *_manager;
     NSError *_underlyingError;
+    NSArray *_questionsArray;
 }
 
 - (void)setUp {
     [super setUp];
     _manager = [[StackOverflowManager alloc] init];
     _manager.delegate = self;
+    Question *question = [[Question alloc] init];
+    _questionsArray = @[question];
 }
 
 - (void)tearDown {
     _manager = nil;
     _manager.delegate = nil;
     _underlyingError = nil;
+    _questionsArray = nil;
     [super tearDown];
 }
 
@@ -111,10 +116,8 @@
 
 - (void)testDelegateNotifiedOfErrorWhenQuestionBuilderFails {
     // given
-    NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
-    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
-    mockQuestionBuilder.arrayToReturn = nil;
-    mockQuestionBuilder.errorToSet = error;
+    id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
+    OCMStub([mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
     _manager.questionBuilder = mockQuestionBuilder;
     
     // when
@@ -123,6 +126,8 @@
     // then
     XCTAssertNotNil(_underlyingError, @"The delegate should have found out about the error");
 }
+
+
 
 #pragma mark -- StackOverflowManagerDelegate
 - (void)fetchingQuestionsFailedWithError:(NSError *)error {

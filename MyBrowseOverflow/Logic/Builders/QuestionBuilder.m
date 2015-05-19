@@ -11,7 +11,7 @@
 @implementation QuestionBuilder
 
 - (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error {
-    return nil;
+    return [NSArray array];
 }
 
 @end

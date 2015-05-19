@@ -9,12 +9,22 @@
 #import "StackOverflowManager.h"
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
+#import "QuestionBuilder.h"
 
 static NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
 
 @implementation StackOverflowManager
 
 @synthesize delegate    = _delegate;
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _questionBuilder = [[QuestionBuilder alloc] init];
+    }
+    return self;
+}
 
 - (void)setDelegate:(id<StackOverflowManagerDelegate>)newDelegate {
     if (newDelegate && ![newDelegate conformsToProtocol:@protocol(StackOverflowManagerDelegate)]) {
@@ -34,6 +44,10 @@ static NSString * const StackOverflowManagerError = @"StackOverflowManagerError"
     NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSUnderlyingErrorKey];
     NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError code:StackOverflowManagerErrorQuestionSearchCode userInfo:errorInfo];
     [self.delegate fetchingQuestionsFailedWithError:reportableError];
+}
+
+- (void)receivedQuestionsJson:(NSString *)json {
+    self.questionBuilder.json = json;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "StackOverflowManagerDelegate.h"
 @class StackOverflowCommunicator;
 @class Topic;
+@class QuestionBuilder;
 
 static NSString * const StackOverflowManagerError;
 
@@ -20,7 +21,10 @@ enum {
 @interface StackOverflowManager : NSObject
 @property (assign, nonatomic) id<StackOverflowManagerDelegate> delegate;
 @property (strong) StackOverflowCommunicator *communicator;
+@property (strong) QuestionBuilder *questionBuilder;
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
 - (void)searchingForQuestionsFailedWithError:(NSError *)error;
+- (void)receivedQuestionsJson:(NSString *)json;
+
 @end

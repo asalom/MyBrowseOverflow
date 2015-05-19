@@ -11,9 +11,7 @@
 #import "StackOverflowManager.h"
 #import "StackOverflowManagerDelegate.h"
 #import "StackOverflowCommunicator.h"
-#import "MockStackOverflowManagerDelegate.h"
-#import "MockStackOverflowCommunicator.h"
-#import "Topic.h"
+#import "QuestionBuilder.h"
 #import <OCMock/OCMock.h>
 
 @interface QuestionCreationTests : XCTestCase <StackOverflowManagerDelegate>
@@ -43,8 +41,7 @@
 }
 
 - (void)testConformingObjectCanBeDelegate {
-    id<StackOverflowManagerDelegate> delegate = [[MockStackOverflowManagerDelegate alloc] init];
-    XCTAssertNoThrow(_manager.delegate = delegate, @"Object confirming to the delegate protocol should be used");
+    XCTAssertNoThrow(_manager.delegate = self, @"Object confirming to the delegate protocol should be used");
 }
 
 - (void)testManagerAcceptsNilAsDelegate {
@@ -84,6 +81,18 @@
     
     // then
     XCTAssertEqualObjects([[_underlyingError userInfo] objectForKey:NSUnderlyingErrorKey], error, @"The underlying error should be available to client code");
+}
+
+- (void)testQuestionJSONIsPassedToQuestionBuilder {
+    // when
+    QuestionBuilder *questionBuilder = [[QuestionBuilder alloc] init];
+    _manager.questionBuilder = questionBuilder;
+    
+    // given
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertEqualObjects([questionBuilder json], @"Fake JSON");
 }
 
 #pragma mark -- StackOverflowManagerDelegate

@@ -25,6 +25,6 @@ enum {
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
 - (void)searchingForQuestionsFailedWithError:(NSError *)error;
-- (void)receivedQuestionsJson:(NSString *)json;
+- (void)receivedQuestionsJson:(NSString *)objectNotation;
 
 @end

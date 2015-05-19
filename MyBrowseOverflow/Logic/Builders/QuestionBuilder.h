@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface QuestionBuilder : NSObject
-@property (copy) NSString *json;
 
 - (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error;
 @end

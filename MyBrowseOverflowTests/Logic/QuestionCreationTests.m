@@ -12,6 +12,7 @@
 #import "StackOverflowManagerDelegate.h"
 #import "StackOverflowCommunicator.h"
 #import "QuestionBuilder.h"
+#import "FakeQuestionBuilder.h"
 #import <OCMock/OCMock.h>
 
 @interface QuestionCreationTests : XCTestCase <StackOverflowManagerDelegate>
@@ -85,16 +86,42 @@
 
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
     // given
+    FakeQuestionBuilder *questionBuilder = [[FakeQuestionBuilder alloc] init];
+    _manager.questionBuilder = questionBuilder;
+    
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertEqualObjects(questionBuilder.json, @"Fake JSON");
+}
+
+- (void)testQuestionJSONIsPassedToQuestionBuilder_OCMock {
+    // given
     id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
-    OCMStub([mockQuestionBuilder json]);
+    OCMExpect([mockQuestionBuilder questionsFromJson:@"Fake JSON" error:[OCMArg anyObjectRef]]);
     _manager.questionBuilder = mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    OCMVerify([mockQuestionBuilder setJson:@"Fake JSON"]);
-    _manager.questionBuilder = nil;
+    [mockQuestionBuilder verify];
+}
+
+- (void)testDelegateNotifiedOfErrorWhenQuestionBuilderFails {
+    // given
+    NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
+    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
+    mockQuestionBuilder.arrayToReturn = nil;
+    mockQuestionBuilder.errorToSet = error;
+    _manager.questionBuilder = mockQuestionBuilder;
+    
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertNotNil(_underlyingError, @"The delegate should have found out about the error");
 }
 
 #pragma mark -- StackOverflowManagerDelegate

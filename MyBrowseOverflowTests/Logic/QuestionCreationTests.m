@@ -15,6 +15,7 @@
 #import "FakeQuestionBuilder.h"
 #import <OCMock/OCMock.h>
 #import "Question.h"
+#import "Topic.h"
 
 @interface QuestionCreationTests : XCTestCase <StackOverflowManagerDelegate>
 
@@ -25,6 +26,7 @@
     NSError *_underlyingErrorFromDelegate;
     NSArray *_questionsArray;
     NSArray *_receivedQuestionsArrayFromDelegate;
+    id _mockQuestionBuilder;
 }
 
 - (void)setUp {
@@ -33,6 +35,7 @@
     _manager.delegate = self;
     Question *question = [[Question alloc] init];
     _questionsArray = @[question];
+    _mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
 }
 
 - (void)tearDown {
@@ -59,13 +62,12 @@
     // given
     id communicatorMock = OCMClassMock([StackOverflowCommunicator class]);
     _manager.communicator = communicatorMock;
-    OCMExpect([communicatorMock searchForQuestionsWithTag:nil]);
     
     // when
     [_manager fetchQuestionsOnTopic:nil];
     
     // then
-    OCMExpect(communicatorMock);
+    OCMVerify([communicatorMock searchForQuestionsWithTag:[OCMArg any]]);
 }
 
 - (void)testErrorReturnedToDelegateIsNotErrorNotifiedByCommunicator {
@@ -75,7 +77,7 @@
     // when
     [_manager searchingForQuestionsFailedWithError:error];
     
-    //then
+    // then
     XCTAssertFalse(_underlyingErrorFromDelegate == error, @"Error should be at the correct level of abstraction");
 }
 
@@ -92,22 +94,20 @@
 
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
     // given
-    id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
-    OCMExpect([mockQuestionBuilder questionsFromJson:@"Fake JSON" error:[OCMArg anyObjectRef]]);
-    _manager.questionBuilder = mockQuestionBuilder;
+    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    [mockQuestionBuilder verify];
+    //[_mockQuestionBuilder verify];
+    OCMVerify([_mockQuestionBuilder questionsFromJson:@"Fake JSON" error:[OCMArg anyObjectRef]]);
 }
 
 - (void)testDelegateNotifiedOfErrorWhenQuestionBuilderFails {
     // given
-    id mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
-    OCMStub([mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
-    _manager.questionBuilder = mockQuestionBuilder;
+    OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
+    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
@@ -118,27 +118,27 @@
 
 - (void)testDelegateNotToldAboutErrorWhenQuestionsReceived {
     // given
-    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
-    mockQuestionBuilder.arrayToReturn = _questionsArray;
-    _manager.questionBuilder = mockQuestionBuilder;
+    OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
+    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
+    OCMVerifyAll(_mockQuestionBuilder);
     XCTAssertNil(_underlyingErrorFromDelegate, @"No error should be reported");
 }
 
 - (void)testDelegateReceivesTheQuestionsDiscoveredByManager {
     // given
-    FakeQuestionBuilder *mockQuestionBuilder = [[FakeQuestionBuilder alloc] init];
-    mockQuestionBuilder.arrayToReturn = _questionsArray;
-    _manager.questionBuilder = mockQuestionBuilder;
+    OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
+    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
+    OCMVerifyAll(_mockQuestionBuilder);
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, _questionsArray, @"The manager should have sent its questions to the delegate");
 }
 

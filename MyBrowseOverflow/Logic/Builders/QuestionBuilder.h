@@ -11,7 +11,8 @@
 static NSString * const QuestionBuilderErrorDomain;
 
 enum {
-    QuestionBuilderInvalidJsonError
+    QuestionBuilderInvalidJsonError,
+    QuestionBuilderDataError
 };
 
 @interface QuestionBuilder : NSObject

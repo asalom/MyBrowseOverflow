@@ -15,12 +15,30 @@ static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomai
 - (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error {
     NSParameterAssert(objectNotation);
     
-    //NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    if (error != NULL) {
-        *error = [NSError errorWithDomain:QuestionBuilderErrorDomain
-                                     code:QuestionBuilderInvalidJsonError
-                                 userInfo:nil];
+    NSData *data = [objectNotation dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *parsingError = nil;
+    NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:data
+                                                                 options:0
+                                                                   error:&parsingError];
+    if (parsedObject == nil) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:QuestionBuilderErrorDomain
+                                         code:QuestionBuilderInvalidJsonError
+                                     userInfo:nil];
+        }
+        return nil;
     }
+    
+    NSArray *questions = [parsedObject objectForKey:@"items"];
+    if (questions == nil) {
+        if (error != NULL) {
+            *error = [NSError errorWithDomain:QuestionBuilderErrorDomain
+                                         code:QuestionBuilderDataError
+                                     userInfo:nil];
+        }
+        return nil;
+    }
+    
     return nil;
 }
 

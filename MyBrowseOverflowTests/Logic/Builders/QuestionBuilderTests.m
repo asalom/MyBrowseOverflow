@@ -52,4 +52,24 @@
     XCTAssertNoThrow([_questionBuilder questionsFromJson:@"Not JSON" error:NULL], @"Using a NULL error parameter should not be a problem");
 }
 
+- (void)testRealJsonWithoutQuestionsArrayIsError {
+    // given
+    NSString *jsonString = @"{\"items=\":[]}";
+    
+    // then
+    XCTAssertNil([_questionBuilder questionsFromJson:jsonString error:NULL], @"No questions to parse in this JSON");
+}
+
+- (void)testRealJsonWithoutQuestionsReturnsMissingDataError {
+    // given
+    NSString *jsonString = @"{\"items=\":[]}";
+    NSError *error = nil;
+    
+    // when
+    [_questionBuilder questionsFromJson:jsonString error:&error];
+    
+    // then
+    XCTAssertEqual(error.code, QuestionBuilderDataError);
+}
+
 @end

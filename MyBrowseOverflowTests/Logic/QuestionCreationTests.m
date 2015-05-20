@@ -36,6 +36,7 @@
     Question *question = [[Question alloc] init];
     _questionsArray = @[question];
     _mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
+    _manager.questionBuilder = _mockQuestionBuilder;
 }
 
 - (void)tearDown {
@@ -93,9 +94,7 @@
 }
 
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
-    // given
-    _manager.questionBuilder = _mockQuestionBuilder;
-    
+
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
@@ -107,7 +106,6 @@
 - (void)testDelegateNotifiedOfErrorWhenQuestionBuilderFails {
     // given
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
-    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
@@ -119,7 +117,6 @@
 - (void)testDelegateNotToldAboutErrorWhenQuestionsReceived {
     // given
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
-    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
@@ -131,13 +128,23 @@
 - (void)testDelegateReceivesTheQuestionsDiscoveredByManager {
     // given
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
-    _manager.questionBuilder = _mockQuestionBuilder;
     
     // when
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, _questionsArray, @"The manager should have sent its questions to the delegate");
+}
+
+- (void)testEmptyArrayIsPassedToDelegate {
+    // given
+    OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn([NSArray array]);
+    
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, [NSArray array], @"Returning empty array is not an error");
 }
 
 #pragma mark -- StackOverflowManagerDelegate

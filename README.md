@@ -16,10 +16,10 @@ At the time I reached out Graham's book, StackOverflow had already shutdown thei
     "items": [
     {
         "tags": [
-        "ios",
-        "iphone",
-        "mobile",
-        "itunesconnect"
+            "ios",
+            "iphone",
+            "mobile",
+            "itunesconnect"
         ],
         "owner":{
             "reputation": 3846,

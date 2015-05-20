@@ -20,4 +20,5 @@
 @property NSInteger score;
 @property (nonatomic, strong) NSArray *answers;
 @property (strong) Person *owner;
+@property (copy) NSString *body;
 @end

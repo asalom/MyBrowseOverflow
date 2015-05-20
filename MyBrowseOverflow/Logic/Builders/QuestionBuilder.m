@@ -55,4 +55,19 @@ static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomai
     return [results copy];
 }
 
+
+- (void)fillInDetailsForQuestion:(Question *)question fromJson:(NSString *)objectNotation {
+    NSParameterAssert(question != nil);
+    NSParameterAssert(objectNotation != nil);
+    NSData *unicodeNotation = [objectNotation dataUsingEncoding: NSUTF8StringEncoding];
+    NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData: unicodeNotation options: 0 error: NULL];
+    if (![parsedObject isKindOfClass: [NSDictionary class]]) {
+        return;
+    }
+    NSString *questionBody = [[[parsedObject objectForKey: @"questions"] lastObject] objectForKey: @"body"];
+    if (questionBody) {
+        question.body = questionBody;
+    }
+}
+
 @end

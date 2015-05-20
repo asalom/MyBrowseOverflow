@@ -6,9 +6,16 @@
 //  Copyright (c) 2015 Alex Salom © alexsalom.es. All rights reserved.
 //
 
+@class Question;
+
 @protocol StackOverflowManagerDelegate <NSObject>
 
+// Questions
 - (void)didReceiveQuestions:(NSArray *)questions;
 - (void)fetchingQuestionsFailedWithError:(NSError *)error;
+
+// Questions body
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error;
+- (void)didReceiveBodyForQuestion:(Question *)question;
 
 @end

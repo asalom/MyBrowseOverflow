@@ -18,4 +18,12 @@
     // silence warning
 }
 
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error {
+    // silence warning
+}
+
+- (void)didReceiveBodyForQuestion:(Question *)question {
+    // silence warning
+}
+
 @end

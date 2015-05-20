@@ -42,6 +42,7 @@ static NSString * const StackOverflowManagerError = @"StackOverflowManagerError"
 }
 
 - (void)fetchBodyForQuestion:(Question *)question {
+    self.questionNeedingBody = question;
     [self.communicator downloadInformationForQuestionWithId:question.questionId];
 }
 
@@ -60,6 +61,22 @@ static NSString * const StackOverflowManagerError = @"StackOverflowManagerError"
     else {
         [self.delegate didReceiveQuestions:questions];
     }
+}
+
+- (void)receivedQuestionBodyJson:(NSString *)objectNotation {
+    [self.questionBuilder fillInDetailsForQuestion:self.questionNeedingBody fromJson: objectNotation];
+    [self.delegate didReceiveBodyForQuestion:self.questionNeedingBody];
+    self.questionNeedingBody = nil;
+}
+
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error {
+    NSDictionary *errorInfo = nil;
+    if (error) {
+        errorInfo = [NSDictionary dictionaryWithObject: error forKey: NSUnderlyingErrorKey];
+    }
+    NSError *reportableError = [NSError errorWithDomain: StackOverflowManagerError code: StackOverflowManagerErrorQuestionBodyFetchCode userInfo:errorInfo];
+    [self.delegate fetchingQuestionBodyFailedWithError: reportableError];
+    self.questionNeedingBody = nil;
 }
 
 #pragma mark Class Continuation

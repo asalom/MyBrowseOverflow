@@ -26,6 +26,7 @@
     NSError *_underlyingErrorFromDelegate;
     NSArray *_questionsArray;
     NSArray *_receivedQuestionsArrayFromDelegate;
+    Question *_receivedQuestionBodyFromDelegate;
     id _mockQuestionBuilder;
     Question *_questionToFetch;
     id _mockCommunicator;
@@ -51,6 +52,8 @@
     _questionToFetch = nil;
     _questionsArray = nil;
     _mockCommunicator = nil;
+    _receivedQuestionBodyFromDelegate = nil;
+    _receivedQuestionsArrayFromDelegate = nil;
     [super tearDown];
 }
 
@@ -154,15 +157,12 @@
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, [NSArray array], @"Returning empty array is not an error");
 }
 
-
-#warning starting from here everything is unfinished until StackOverflowManagerDelegate mark --
-
 - (void)testAskingForQuestionBodyMeansRequestingData {
     // when
     [_manager fetchBodyForQuestion:_questionToFetch];
     
     // then
-    //OCMVerify([_mockCommunicator fetchQuestionBody:_questionToFetch]);
+    OCMVerify([_mockCommunicator downloadInformationForQuestionWithId:_questionToFetch.questionId]);
 }
 
 - (void)testDelegateNotifiedOfFailureToFetchQuestion {
@@ -170,28 +170,27 @@
     NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     
     // when
-    //[_manager fetchingQuestionBodyFailedWithError:error];
+    [_manager fetchingQuestionBodyFailedWithError:error];
     
     // then
-    //XCTAssertNotNil([_underlyingErrorFromDelegate.userInfo], @"Delegate should have found about this error");
+    XCTAssertNotNil(_underlyingErrorFromDelegate.userInfo, @"Delegate should have found about this error");
 }
 
 - (void)testManagerPassesRetrievedQuestionBodyToQuestionBuilder {
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager receivedQuestionBodyJson:@"Fake JSON"];
     
     // then
-    //OCMVerify([_mockQuestionBuilder setJson:@"Fake JSON"]);
+    OCMVerify([_mockQuestionBuilder fillInDetailsForQuestion:[OCMArg any] fromJson:@"Fake JSON"]);
 }
 
 - (void)testManagerPassesQuestionItWasSentToQuestionBuilderForFillingIn {
     // when
     [_manager fetchBodyForQuestion:_questionToFetch];
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager receivedQuestionBodyJson:@"Fake JSON"];
     
     // then
-    //XCTAssertEqualObjects(_mockQuestionBuilder , <#expression2, ...#>)
-#warning TODO: then
+    OCMVerify([_mockQuestionBuilder fillInDetailsForQuestion:_questionToFetch fromJson:[OCMArg any]]);
 }
 
 #pragma mark -- StackOverflowManagerDelegate
@@ -201,6 +200,14 @@
 
 - (void)didReceiveQuestions:(NSArray *)questions {
     _receivedQuestionsArrayFromDelegate = questions;
+}
+
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error {
+    _underlyingErrorFromDelegate = error;
+}
+
+- (void)didReceiveBodyForQuestion:(Question *)question {
+    _receivedQuestionBodyFromDelegate = question;
 }
 
 @end

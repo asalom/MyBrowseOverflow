@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Question;
+
 static NSString * const QuestionBuilderErrorDomain;
 
 enum {
@@ -18,4 +20,5 @@ enum {
 @interface QuestionBuilder : NSObject
 
 - (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error;
+- (void)fillInDetailsForQuestion:(Question *)question fromJson:(NSString *)objectNotation;
 @end

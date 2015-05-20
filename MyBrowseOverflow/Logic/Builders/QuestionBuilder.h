@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * const QuestionBuilderErrorDomain;
+
+enum {
+    QuestionBuilderInvalidJsonError
+};
+
 @interface QuestionBuilder : NSObject
 
 - (NSArray *)questionsFromJson:(NSString *)objectNotation error:(NSError **)error;

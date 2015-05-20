@@ -125,7 +125,6 @@
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    OCMVerifyAll(_mockQuestionBuilder);
     XCTAssertNil(_underlyingErrorFromDelegate, @"No error should be reported");
 }
 
@@ -138,7 +137,6 @@
     [_manager receivedQuestionsJson:@"Fake JSON"];
     
     // then
-    OCMVerifyAll(_mockQuestionBuilder);
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, _questionsArray, @"The manager should have sent its questions to the delegate");
 }
 

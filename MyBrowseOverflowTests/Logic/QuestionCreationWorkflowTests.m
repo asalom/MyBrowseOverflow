@@ -17,11 +17,11 @@
 #import "Question.h"
 #import "Topic.h"
 
-@interface QuestionCreationTests : XCTestCase <StackOverflowManagerDelegate>
+@interface QuestionCreationWorkflowTests : XCTestCase <StackOverflowManagerDelegate>
 
 @end
 
-@implementation QuestionCreationTests {
+@implementation QuestionCreationWorkflowTests {
     StackOverflowManager *_manager;
     NSError *_underlyingErrorFromDelegate;
     NSArray *_questionsArray;

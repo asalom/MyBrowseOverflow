@@ -14,4 +14,8 @@
     self.fetchError = error;
 }
 
+- (void)didReceiveQuestions:(NSArray *)questions {
+    // silence warning
+}
+
 @end

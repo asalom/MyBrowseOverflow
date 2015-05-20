@@ -10,6 +10,7 @@
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
 #import "QuestionBuilder.h"
+#import "Question.h"
 
 static NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
 
@@ -38,6 +39,10 @@ static NSString * const StackOverflowManagerError = @"StackOverflowManagerError"
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic {
     [self.communicator searchForQuestionsWithTag:topic.tag];
+}
+
+- (void)fetchBodyForQuestion:(Question *)question {
+    [self.communicator downloadInformationForQuestionWithId:question.questionId];
 }
 
 - (void)searchingForQuestionsFailedWithError:(NSError *)error {

@@ -11,6 +11,7 @@
 @class StackOverflowCommunicator;
 @class Topic;
 @class QuestionBuilder;
+@class Question;
 
 static NSString * const StackOverflowManagerError;
 
@@ -24,6 +25,7 @@ enum {
 @property (strong) QuestionBuilder *questionBuilder;
 
 - (void)fetchQuestionsOnTopic:(Topic *)topic;
+- (void)fetchBodyForQuestion:(Question *)question;
 - (void)searchingForQuestionsFailedWithError:(NSError *)error;
 - (void)receivedQuestionsJson:(NSString *)objectNotation;
 

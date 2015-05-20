@@ -7,6 +7,8 @@
 //
 
 #import "QuestionBuilder.h"
+#import "PersonBuilder.h"
+#import "Question.h"
 
 static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomain";
 
@@ -39,7 +41,18 @@ static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomai
         return nil;
     }
     
-    return nil;
+    NSMutableArray *results = [NSMutableArray arrayWithCapacity:questions.count];
+    for (NSDictionary *parsedQuestion in questions) {
+        Question *question = [[Question alloc] init];
+        question.questionId = [[parsedQuestion objectForKey: @"question_id"] integerValue];
+        question.date = [NSDate dateWithTimeIntervalSince1970: [[parsedQuestion objectForKey: @"creation_date"] doubleValue]];
+        question.title = [parsedQuestion objectForKey: @"title"];
+        question.score = [[parsedQuestion objectForKey: @"score"] integerValue];
+        NSDictionary *ownerValues = [parsedQuestion objectForKey: @"owner"];
+        question.owner = [PersonBuilder personFromDictionary:ownerValues];
+        [results addObject: question];
+    }
+    return [results copy];
 }
 
 @end

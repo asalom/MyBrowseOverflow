@@ -27,23 +27,30 @@
     NSArray *_questionsArray;
     NSArray *_receivedQuestionsArrayFromDelegate;
     id _mockQuestionBuilder;
+    Question *_questionToFetch;
+    id _mockCommunicator;
 }
 
 - (void)setUp {
     [super setUp];
     _manager = [[StackOverflowManager alloc] init];
     _manager.delegate = self;
-    Question *question = [[Question alloc] init];
-    _questionsArray = @[question];
+    _questionToFetch = [[Question alloc] init];
+    _questionToFetch.questionId = 1234;
+    _questionsArray = @[_questionToFetch];
     _mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
     _manager.questionBuilder = _mockQuestionBuilder;
+    _mockCommunicator = OCMClassMock([StackOverflowCommunicator class]);
+    _manager.communicator = _mockCommunicator;
 }
 
 - (void)tearDown {
     _manager = nil;
     _manager.delegate = nil;
     _underlyingErrorFromDelegate = nil;
+    _questionToFetch = nil;
     _questionsArray = nil;
+    _mockCommunicator = nil;
     [super tearDown];
 }
 
@@ -145,6 +152,46 @@
     
     // then
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, [NSArray array], @"Returning empty array is not an error");
+}
+
+
+#warning starting from here everything is unfinished until StackOverflowManagerDelegate mark --
+
+- (void)testAskingForQuestionBodyMeansRequestingData {
+    // when
+    [_manager fetchBodyForQuestion:_questionToFetch];
+    
+    // then
+    //OCMVerify([_mockCommunicator fetchQuestionBody:_questionToFetch]);
+}
+
+- (void)testDelegateNotifiedOfFailureToFetchQuestion {
+    // given
+    NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
+    
+    // when
+    //[_manager fetchingQuestionBodyFailedWithError:error];
+    
+    // then
+    //XCTAssertNotNil([_underlyingErrorFromDelegate.userInfo], @"Delegate should have found about this error");
+}
+
+- (void)testManagerPassesRetrievedQuestionBodyToQuestionBuilder {
+    // when
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    //OCMVerify([_mockQuestionBuilder setJson:@"Fake JSON"]);
+}
+
+- (void)testManagerPassesQuestionItWasSentToQuestionBuilderForFillingIn {
+    // when
+    [_manager fetchBodyForQuestion:_questionToFetch];
+    [_manager receivedQuestionsJson:@"Fake JSON"];
+    
+    // then
+    //XCTAssertEqualObjects(_mockQuestionBuilder , <#expression2, ...#>)
+#warning TODO: then
 }
 
 #pragma mark -- StackOverflowManagerDelegate

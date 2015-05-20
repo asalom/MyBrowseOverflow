@@ -10,7 +10,7 @@
 
 @interface StackOverflowCommunicator : NSObject
 - (void)searchForQuestionsWithTag:(NSString *)tag;
-
+- (void)downloadInformationForQuestionWithId:(NSInteger)questionId;
 
 
 @end

@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 @class Answer;
+@class Person;
 
 @interface Question : NSObject
 - (id)initWithTitle:(NSString *)title date:(NSDate *)date score:(NSInteger)score;
 - (void)addAnswer:(Answer *)answer;
 
-@property (readonly) NSString *title;
-@property (readonly) NSDate *date;
-@property (readonly) NSInteger score;
-@property (readonly) NSArray *answers;
+@property NSInteger questionId;
+@property (copy) NSString *title;
+@property (copy) NSDate *date;
+@property NSInteger score;
+@property (nonatomic, strong) NSArray *answers;
+@property (strong) Person *owner;
 @end

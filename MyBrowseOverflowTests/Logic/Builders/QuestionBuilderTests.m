@@ -117,4 +117,8 @@ static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mo
     XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:_question fromJson:nil], @"Not receiving data should have been handled earlier");
 }
 
+- (void)testBuildingQuestionBodyWithNoQuestionCannotBeTried {
+    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:nil fromJson:QuestionJson]);
+}
+
 @end

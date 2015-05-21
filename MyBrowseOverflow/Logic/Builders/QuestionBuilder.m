@@ -10,7 +10,7 @@
 #import "PersonBuilder.h"
 #import "Question.h"
 
-static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomain";
+NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomain";
 
 @implementation QuestionBuilder
 

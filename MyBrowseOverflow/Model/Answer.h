@@ -10,7 +10,7 @@
 @class Person;
 
 @interface Answer : NSObject
-@property (copy) NSString *text;
+@property (copy) NSString *body;
 @property (strong) Person *person;
 @property NSInteger score;
 @property (getter=isAccepted) BOOL accepted;

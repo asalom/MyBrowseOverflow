@@ -56,25 +56,25 @@ At the time I reached out Graham's book, StackOverflow had already shutdown thei
     "items":[
     {
         "owner": {
-            "reputation":97060,
-            "user_id":116862,
-            "user_type":"registered",
-            "accept_rate":90,
-            "profile_image":"https://www.gravatar.com/avatar/d0efc09d023fa0569a2479c9dcfd4620?s=128&d=identicon&r=PG",
-            "display_name":"Ole Begemann",
-            "link":"http://stackoverflow.com/users/116862/ole-begemann"
+            "reputation": 97060,
+            "user_id": 116862,
+            "user_type": "registered",
+            "accept_rate": 90,
+            "profile_image": "https://www.gravatar.com/avatar/d0efc09d023fa0569a2479c9dcfd4620",
+            "display_name": "Ole Begemann",
+            "link": "http://stackoverflow.com/users/116862/ole-begemann"
         },
-        "is_accepted":true,
-        "score":16,
-        "last_activity_date":1339751159,
-        "creation_date":1339751159,
-        "answer_id":11047650,
-        "question_id":11047351,
+        "is_accepted": true,
+        "score": 16,
+        "last_activity_date": 1339751159,
+        "creation_date": 1339751159,
+        "answer_id": 11047650,
+        "question_id": 11047351,
         "title": "Workaround to accomplish protected properties in Objective-C",
-        "body":"<p>Sure, that works fine. Apple uses the same approach for example in the <code>UIGestureRecognizer</code> class. Subclasses have to import the additional <code>UIGestureRecognizerSubclass.h</code> file and override the methods that are declared in that file.</p>\n"
+        "body": "<p>Sure, that works fine. Apple uses the same approach for example in the <code>UIGestureRecognizer</code> class. Subclasses have to import the additional <code>UIGestureRecognizerSubclass.h</code> file and override the methods that are declared in that file.</p>\n"
     }],
-    "has_more":false,
-    "quota_max":300,
-    "quota_remaining":256
+    "has_more": false,
+    "quota_max": 300,
+    "quota_remaining": 256
 }
 ```

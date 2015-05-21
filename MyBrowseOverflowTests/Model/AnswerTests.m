@@ -33,7 +33,7 @@
 }
 
 - (void)testAnswerHasSomeTest {
-    XCTAssertEqualObjects(_answer.text, @"The answer is 42", @"Answer contains some text");
+    XCTAssertEqualObjects(_answer.body, @"The answer is 42", @"Answer contains some text");
 }
 
 - (void)testSomeoneProvidedTheAnswer {

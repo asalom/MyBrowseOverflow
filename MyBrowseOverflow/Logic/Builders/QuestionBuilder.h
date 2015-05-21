@@ -10,7 +10,7 @@
 
 @class Question;
 
-static NSString * const QuestionBuilderErrorDomain;
+extern NSString * const QuestionBuilderErrorDomain;
 
 enum {
     QuestionBuilderInvalidJsonError,

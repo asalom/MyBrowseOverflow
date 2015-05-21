@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        _text = [text copy];
+        _body = [text copy];
         _person = person;
         _score = score;
     }

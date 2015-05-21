@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "Question.h"
 #import "Answer.h"
+#import "Person.h"
 
 @interface QuestionTests : XCTestCase
 
@@ -19,6 +20,7 @@
     Question *_question;
     Answer *_lowScore;
     Answer *_highScore;
+    Person *_owner;
 }
 
 - (void)setUp {
@@ -34,6 +36,9 @@
     _highScore.accepted = YES;
     _highScore.score = 4;
     [_question addAnswer:_highScore];
+    
+    _owner = [[Person alloc] initWithName:@"Alex Salom" avatarUrlString:@"http://example.com/avatar.png"];
+    _question.owner = _owner;
 }
 
 - (void)tearDown {
@@ -69,6 +74,10 @@
     NSInteger highIndex = [answers indexOfObject:_highScore];
     NSInteger lowIndex = [answers indexOfObject:_lowScore];
     XCTAssertTrue(highIndex < lowIndex, @"High-scoring answer comes first");
+}
+
+- (void)testQuestionWasAskedBySomeone {
+    XCTAssertEqualObjects(_question.owner, _owner, @"Question should keep track of who asked it");
 }
 
 @end

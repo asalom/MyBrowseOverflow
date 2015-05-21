@@ -14,7 +14,7 @@
 + (Person *)personFromDictionary:(NSDictionary *)personDictionary {
     NSString *name = [personDictionary objectForKey: @"display_name"];
     NSString *avatarString = [personDictionary objectForKey:@"profile_image"];
-    Person *person = [[Person alloc] initWithName: name avatarString:avatarString];
+    Person *person = [[Person alloc] initWithName: name avatarUrlString:avatarString];
     return person;
 }
 

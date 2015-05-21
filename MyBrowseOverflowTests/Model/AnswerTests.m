@@ -22,7 +22,7 @@
 
 - (void)setUp {
     [super setUp];
-    Person *person = [[Person alloc] initWithName:@"Alex Salom" avatarString:@"http://exammple.com/avatar.png"];
+    Person *person = [[Person alloc] initWithName:@"Alex Salom" avatarUrlString:@"http://exammple.com/avatar.png"];
     _answer = [[Answer alloc] initWithText:@"The answer is 42" person:person score:42];
     _otherAnswer = [[Answer alloc] initWithText:@"I have the answer you need" person:person score:42];
 }

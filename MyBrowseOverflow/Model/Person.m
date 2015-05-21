@@ -9,12 +9,12 @@
 #import "Person.h"
 
 @implementation Person
-- (instancetype)initWithName:(NSString *)name avatarString:(NSString *)avatarString
+- (instancetype)initWithName:(NSString *)name avatarUrlString:(NSString *)avatarUrlString
 {
     self = [super init];
     if (self) {
         _name = [name copy];
-        _avatarUrl = [NSURL URLWithString:avatarString];
+        _avatarUrl = [NSURL URLWithString:avatarUrlString];
     }
     return self;
 }

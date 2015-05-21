@@ -20,7 +20,7 @@
 
 - (void)setUp {
     [super setUp];
-    _person = [[Person alloc] initWithName:@"Alex Salom" avatarString:@"http://example.com/avatar.png"];
+    _person = [[Person alloc] initWithName:@"Alex Salom" avatarUrlString:@"http://example.com/avatar.png"];
 }
 
 - (void)tearDown {

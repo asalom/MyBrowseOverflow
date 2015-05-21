@@ -35,6 +35,9 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 
 - (void)fetchContentAtUrl:(NSURL *)url {
     _fetchingUrl = url;
+    NSURLRequest *request = [NSURLRequest requestWithURL:_fetchingUrl];
+    [_fetchingConnection cancel];
+    _fetchingConnection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 - (NSURL *)questionsURLWithTag:(NSString *)tag {
@@ -50,5 +53,11 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
     
     return [NSURL URLWithString:urlString];
 }
+
+- (void)cancelAndDiscardUrlConnection {
+    [_fetchingConnection cancel];
+    _fetchingConnection = nil;
+}
+
 
 @end

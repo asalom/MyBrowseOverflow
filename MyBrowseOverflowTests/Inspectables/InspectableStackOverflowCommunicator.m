@@ -16,8 +16,12 @@
 
 @implementation InspectableStackOverflowCommunicator
 
-- (NSURL *)URLToFetch {
+- (NSURL *)urlToFetch {
     return _fetchingUrl;
+}
+
+- (NSURLConnection *)currentUrlConnection {
+    return _fetchingConnection;
 }
 
 @end

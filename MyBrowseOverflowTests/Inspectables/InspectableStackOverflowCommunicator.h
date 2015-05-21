@@ -10,5 +10,6 @@
 #import "StackOverflowCommunicator.h"
 
 @interface InspectableStackOverflowCommunicator : StackOverflowCommunicator
-- (NSURL *)URLToFetch;
+- (NSURL *)urlToFetch;
+- (NSURLConnection *)currentUrlConnection;
 @end

@@ -36,7 +36,7 @@
     [_communicator searchForQuestionsWithTag:@"ios"];
     
     // then
-    XCTAssertEqualObjects([_communicator URLToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions?tagged=ios&pagesize=20&site=stackoverflow", @"Use the search API to find questions with a particular tag");
+    XCTAssertEqualObjects([_communicator urlToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions?tagged=ios&pagesize=20&site=stackoverflow", @"Use the search API to find questions with a particular tag");
 }
 
 - (void)testFillingInQuestionBodyCallsQuestionApi {
@@ -44,7 +44,7 @@
     [_communicator downloadInformationForQuestionWithId:12345];
     
     // then
-    XCTAssertEqualObjects([_communicator URLToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions/12345?filter=withbody&site=stackoverflow");
+    XCTAssertEqualObjects([_communicator urlToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions/12345?filter=withbody&site=stackoverflow");
 }
 
 - (void)testFetchingAnswersToQuestionCallsQuestionApi {
@@ -52,7 +52,26 @@
     [_communicator downloadAnswersToQuestionWithId:12345];
     
     // then
-    XCTAssertEqualObjects([_communicator URLToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions/12345/answers?filter=!-*f(6t*ZdXeu&site=stackoverflow");
+    XCTAssertEqualObjects([_communicator urlToFetch].absoluteString, @"http://api.stackexchange.com/2.2/questions/12345/answers?filter=!-*f(6t*ZdXeu&site=stackoverflow");
+}
+
+- (void)testSearchingForQuestionsCreatesUrlConnection {
+    // when
+    [_communicator searchForQuestionsWithTag:@"ios"];
+    
+    // then
+    XCTAssertNotNil([_communicator currentUrlConnection], @"There should be a URL connection in-flight now.");
+    [_communicator cancelAndDiscardUrlConnection];
+}
+
+- (void)testStartingNewSearchThrowsOutOldConnection {
+    // when
+    [_communicator searchForQuestionsWithTag:@"ios"];
+    NSURLConnection *firstConnection = [_communicator currentUrlConnection];
+    [_communicator searchForQuestionsWithTag:@"cocoa"];
+    NSURLConnection *secondConnection = [_communicator currentUrlConnection];
+    XCTAssertNotEqualObjects(firstConnection, secondConnection, @"The communicator needs to replace its URLConnection to start a new one");
+    [_communicator cancelAndDiscardUrlConnection];
 }
 
 @end

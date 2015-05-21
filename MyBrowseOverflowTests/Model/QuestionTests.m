@@ -70,9 +70,12 @@
 }
 
 - (void)testHighScoreAnswerBeforeLow {
+    // given
     NSArray *answers = _question.answers;
     NSInteger highIndex = [answers indexOfObject:_highScore];
     NSInteger lowIndex = [answers indexOfObject:_lowScore];
+    
+    // then
     XCTAssertTrue(highIndex < lowIndex, @"High-scoring answer comes first");
 }
 

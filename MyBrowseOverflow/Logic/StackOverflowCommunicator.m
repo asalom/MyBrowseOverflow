@@ -8,6 +8,12 @@
 
 #import "StackOverflowCommunicator.h"
 
+@interface StackOverflowCommunicator ()
+@property (strong) NSURLConnection *connection;
+@end
+
+NSString * const StackOverflowCommunicatorErrorDomain = @"StackOverflowCommunicatorErrorDomain";
+
 static NSString * const QuestionsWithTagURL = @"http://api.stackexchange.com/2.2/questions?tagged=%@&pagesize=20&site=stackoverflow";
 static NSString * const BodyFromQuestionIdURL = @"http://api.stackexchange.com/2.2/questions/%@?filter=withbody&site=stackoverflow";
 static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/2.2/questions/%@/answers?filter=!-*f(6t*ZdXeu&site=stackoverflow";
@@ -16,28 +22,32 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 
 - (void)searchForQuestionsWithTag:(NSString *)tag {
     NSURL *url = [self urlFromBaseString:QuestionsWithTagURL, tag];
-    [self fetchContentAtUrl:url];
+    [self fetchContentAtURL:url
+               errorHandler:^(NSError *error) {
+                   [self.delegate searchingForQuestionsDidFailWithError:error];
+               }successHandler:^(NSString *objectNotiation) {
+                   [self.delegate didReceiveQuestionsJson:objectNotiation];
+               }];
 }
 
 - (void)downloadInformationForQuestionWithId:(NSInteger)questionId {
     NSURL *url = [self urlFromBaseString:BodyFromQuestionIdURL, @(questionId)];
-    [self fetchContentAtUrl:url];
+    [self fetchContentAtURL:url
+               errorHandler:^(NSError *error) {
+                   [self.delegate fetchingQuestionBodyDidWithError:error];
+               }successHandler:^(NSString *objectNotiation) {
+                   [self.delegate didReceiveQuestionBodyJson:objectNotiation];
+               }];
 }
 
 - (void)downloadAnswersToQuestionWithId:(NSInteger)questionId {
     NSURL *url = [self urlFromBaseString:AnswersToQuestionIdURL, @(questionId)];
-    [self fetchContentAtUrl:url];
-}
-
-- (void)fetchBodyForQuestionWithId:(NSInteger)questionId {
-    
-}
-
-- (void)fetchContentAtUrl:(NSURL *)url {
-    _fetchingUrl = url;
-    NSURLRequest *request = [NSURLRequest requestWithURL:_fetchingUrl];
-    [_fetchingConnection cancel];
-    _fetchingConnection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [self fetchContentAtURL:url
+               errorHandler:^(NSError *error) {
+                   [self.delegate fetchingAnswersDidFailWithError:error];
+               }successHandler:^(NSString *objectNotiation) {
+                   [self.delegate didReceiveAnswerArrayJson:objectNotiation];
+               }];
 }
 
 - (NSURL *)questionsURLWithTag:(NSString *)tag {
@@ -54,10 +64,62 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
     return [NSURL URLWithString:urlString];
 }
 
+- (void)fetchContentAtURL:(NSURL *)url errorHandler:(void (^)(NSError *))errorBlock successHandler:(void (^)(NSString *))successBlock {
+    _fetchingUrl = url;
+    errorHandler = [errorBlock copy];
+    successHandler = [successBlock copy];
+    NSURLRequest *request = [NSURLRequest requestWithURL:_fetchingUrl];
+    
+    [self launchConnectionForRequest:request];
+}
+
+- (void)launchConnectionForRequest:(NSURLRequest *)request {
+    [self cancelAndDiscardUrlConnection];
+    _fetchingConnection = [self connectionWithRequest:request];
+}
+
 - (void)cancelAndDiscardUrlConnection {
     [_fetchingConnection cancel];
     _fetchingConnection = nil;
 }
 
+- (NSURLConnection *)connectionWithRequest:(NSURLRequest *)request {
+    return [NSURLConnection connectionWithRequest:request delegate:self];
+}
+
+#pragma mark - NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    _receivedData = nil;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    if ([httpResponse statusCode] != 200) {
+        NSError *error = [NSError errorWithDomain:StackOverflowCommunicatorErrorDomain code:[httpResponse statusCode] userInfo:nil];
+        errorHandler(error);
+        [self cancelAndDiscardUrlConnection];
+    }
+    else {
+        _receivedData = [[NSMutableData alloc] init];
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    _receivedData = nil;
+    _fetchingConnection = nil;
+    _fetchingUrl = nil;
+    errorHandler(error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    _fetchingConnection = nil;
+    _fetchingUrl = nil;
+    NSString *receivedText = [[NSString alloc] initWithData:_receivedData
+                                                   encoding:NSUTF8StringEncoding];
+    _receivedData = nil;
+    successHandler(receivedText);
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [_receivedData appendData: data];
+}
 
 @end

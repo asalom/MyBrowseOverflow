@@ -11,6 +11,7 @@
 #import <OCMock/OCMock.h>
 #import "StackOverflowCommunicator.h"
 #import "InspectableStackOverflowCommunicator.h"
+#import "NoNetworkedStackOverflowCommunicator.h"
 
 @interface StackOverflowCommunicatorTests : XCTestCase
 
@@ -18,15 +19,18 @@
 
 @implementation StackOverflowCommunicatorTests {
     InspectableStackOverflowCommunicator *_communicator;
+    NoNetworkedStackOverflowCommunicator *_noNetworkedCommunicator;
 }
 
 - (void)setUp {
     [super setUp];
     _communicator = [[InspectableStackOverflowCommunicator alloc] init];
+    _noNetworkedCommunicator = [[NoNetworkedStackOverflowCommunicator alloc] init];
 }
 
 - (void)tearDown {
     _communicator = nil;
+    _noNetworkedCommunicator = nil;
     [super tearDown];
 }
 
@@ -72,6 +76,37 @@
     NSURLConnection *secondConnection = [_communicator currentUrlConnection];
     XCTAssertNotEqualObjects(firstConnection, secondConnection, @"The communicator needs to replace its URLConnection to start a new one");
     [_communicator cancelAndDiscardUrlConnection];
+}
+
+- (void)testReceivingResponseDiscardsExistingData {
+    // given
+    _noNetworkedCommunicator.receivedData = [@"Hello" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // when
+    [_noNetworkedCommunicator searchForQuestionsWithTag:@"ios"];
+    [_noNetworkedCommunicator connection:nil didReceiveResponse:nil];
+    
+    // then
+    XCTAssertEqual(_noNetworkedCommunicator.receivedData.length, 0, @"Data should have been discarded");
+}
+
+- (void)testReceivingResponseDiscardsExistingData_OCMock {
+#warning Continue here
+    return;
+    // given
+    StackOverflowCommunicator *communicator = [[StackOverflowCommunicator alloc] init];
+    id partialMockCommunicator = OCMPartialMock(communicator);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"file:foo"]];
+    NSURLConnection *dummyConnection = [NSURLConnection connectionWithRequest:request delegate:nil];
+    OCMStub([partialMockCommunicator connectionWithRequest:[OCMArg any]]).andReturn(dummyConnection);
+    
+    // when
+    [communicator searchForQuestionsWithTag:@"ios"];
+
+    // then
+}
+
+- (void)testReceivingResponseWith404StatusPassesErrorToDelegate {
 }
 
 @end

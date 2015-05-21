@@ -50,7 +50,7 @@ At the time I reached out Graham's book, StackOverflow had already shutdown thei
 ```
 
 ### Answer
-[/2.2/questions/11047351/answers?filter=!-*f(6t*ZdXeu&site=stackoverflow](http://api.stackexchange.com/2.2/questions/11047351/answers?filter=!-*f(6t*ZdXeu&site=stackoverflow)
+[/2.2/questions/11047351/answers?filter=\!\-\*f\(6t\*ZdXeu&site=stackoverflow](http://api.stackexchange.com/2.2/questions/11047351/answers?filter=\!\-\*f\(6t\*ZdXeu&site=stackoverflow)
 ```json
 {
     "items":[

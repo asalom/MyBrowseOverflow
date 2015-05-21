@@ -113,4 +113,8 @@ static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mo
     XCTAssertEqual(questions.count, 1, @"QuestionBuilder must handle partial input");
 }
 
+- (void)testBuildingQuestionBodyWithNoDataCannotBeTried {
+    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:_question fromJson:nil], @"Not receiving data should have been handled earlier");
+}
+
 @end

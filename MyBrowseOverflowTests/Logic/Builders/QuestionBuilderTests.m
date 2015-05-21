@@ -13,7 +13,7 @@
 #import "Question.h"
 #import "Person.h"
 
-static NSString * const QuestionJsonString = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mobile\",\"itunesconnect\"],\"owner\":{\"reputation\":3846,\"user_id\":980344,\"user_type\":\"registered\",\"accept_rate\":53,\"profile_image\":\"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209\",\"display_name\":\"Alex Salom\",\"link\":\"http://stackoverflow.com/users/980344/velthune\"},\"is_answered\":false,\"view_count\":11,\"answer_count\":1,\"score\":2,\"last_activity_date\":1432119740,\"creation_date\":1432119146,\"last_edit_date\":1432119740,\"question_id\":30347541,\"link\":\"http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect\",\"title\":\"Submit test version on iTunesConnect\"}],\"has_more\":true,\"quota_max\":10000,\"quota_remaining\":9994}";
+static NSString * const QuestionJsonString = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mobile\",\"itunesconnect\"],\"owner\":{\"reputation\":3846,\"user_id\":980344,\"user_type\":\"registered\",\"accept_rate\":53,\"profile_image\":\"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209\",\"display_name\":\"Alex Salom\",\"link\":\"http://stackoverflow.com/users/980344/velthune\"},\"is_answered\":false,\"view_count\":11,\"answer_count\":1,\"score\":2,\"last_activity_date\":1432119740,\"creation_date\":1432119146,\"last_edit_date\":1432119740,\"question_id\":30347541,\"link\":\"http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect\",\"title\":\"Submit test version on iTunesConnect\",\"body\":\"<p>Maybe is not the more appropriate place where ask this question and in this case I apologize.</p>\"}],\"has_more\":true,\"quota_max\":10000,\"quota_remaining\":9994}";
 static NSString * const StringIsNotJson = @"Not JSON";
 static NSString * const NoQuestionsJsonString = @"{\"items=\":[]}";
 static NSString * const EmptyQuestionsJsonString = @"{\"items\":[ { } ]}";
@@ -131,6 +131,14 @@ static NSString * const EmptyQuestionsJsonString = @"{\"items\":[ { } ]}";
     
     // then
     XCTAssertNil(_question.body, @"There was no body to add");
+}
+
+- (void)testBodyContainedInJsonIsAddedToQuestion {
+    // when
+    [_questionBuilder fillInDetailsForQuestion:_question fromJson:QuestionJsonString];
+    
+    // then
+    XCTAssertEqualObjects(_question.body, @"<p>Maybe is not the more appropriate place where ask this question and in this case I apologize.</p>", @"The correct question body is added");
 }
 
 @end

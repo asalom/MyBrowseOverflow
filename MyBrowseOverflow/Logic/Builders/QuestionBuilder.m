@@ -63,7 +63,7 @@ static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomai
     if (![parsedObject isKindOfClass: [NSDictionary class]]) {
         return;
     }
-    NSString *questionBody = [[[parsedObject objectForKey: @"questions"] lastObject] objectForKey: @"body"];
+    NSString *questionBody = [[[parsedObject objectForKey: @"items"] lastObject] objectForKey: @"body"];
     if (questionBody) {
         question.body = questionBody;
     }

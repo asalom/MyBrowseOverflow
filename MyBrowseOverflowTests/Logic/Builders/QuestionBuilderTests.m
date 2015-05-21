@@ -13,8 +13,10 @@
 #import "Question.h"
 #import "Person.h"
 
-static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mobile\",\"itunesconnect\"],\"owner\":{\"reputation\":3846,\"user_id\":980344,\"user_type\":\"registered\",\"accept_rate\":53,\"profile_image\":\"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209\",\"display_name\":\"Alex Salom\",\"link\":\"http://stackoverflow.com/users/980344/velthune\"},\"is_answered\":false,\"view_count\":11,\"answer_count\":1,\"score\":2,\"last_activity_date\":1432119740,\"creation_date\":1432119146,\"last_edit_date\":1432119740,\"question_id\":30347541,\"link\":\"http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect\",\"title\":\"Submit test version on iTunesConnect\"}],\"has_more\":true,\"quota_max\":10000,\"quota_remaining\":9994}";
-static NSString *StringIsNotJson = @"Not JSON";
+static NSString * const QuestionJsonString = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mobile\",\"itunesconnect\"],\"owner\":{\"reputation\":3846,\"user_id\":980344,\"user_type\":\"registered\",\"accept_rate\":53,\"profile_image\":\"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209\",\"display_name\":\"Alex Salom\",\"link\":\"http://stackoverflow.com/users/980344/velthune\"},\"is_answered\":false,\"view_count\":11,\"answer_count\":1,\"score\":2,\"last_activity_date\":1432119740,\"creation_date\":1432119146,\"last_edit_date\":1432119740,\"question_id\":30347541,\"link\":\"http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect\",\"title\":\"Submit test version on iTunesConnect\"}],\"has_more\":true,\"quota_max\":10000,\"quota_remaining\":9994}";
+static NSString * const StringIsNotJson = @"Not JSON";
+static NSString * const NoQuestionsJsonString = @"{\"items=\":[]}";
+static NSString * const EmptyQuestionsJsonString = @"{\"items\":[ { } ]}";
 
 @interface QuestionBuilderTests : XCTestCase
 
@@ -28,7 +30,7 @@ static NSString *StringIsNotJson = @"Not JSON";
 - (void)setUp {
     [super setUp];
     _questionBuilder = [[QuestionBuilder alloc] init];
-    _question = [_questionBuilder questionsFromJson:QuestionJson error:NULL][0];
+    _question = [_questionBuilder questionsFromJson:QuestionJsonString error:NULL][0];
 }
 
 - (void)tearDown {
@@ -61,20 +63,16 @@ static NSString *StringIsNotJson = @"Not JSON";
 }
 
 - (void)testRealJsonWithoutQuestionsArrayIsError {
-    // given
-    NSString *jsonString = @"{\"items=\":[]}";
-    
     // then
-    XCTAssertNil([_questionBuilder questionsFromJson:jsonString error:NULL], @"No questions to parse in this JSON");
+    XCTAssertNil([_questionBuilder questionsFromJson:NoQuestionsJsonString error:NULL], @"No questions to parse in this JSON");
 }
 
 - (void)testRealJsonWithoutQuestionsReturnsMissingDataError {
     // given
-    NSString *jsonString = @"{\"items=\":[]}";
     NSError *error = nil;
     
     // when
-    [_questionBuilder questionsFromJson:jsonString error:&error];
+    [_questionBuilder questionsFromJson:NoQuestionsJsonString error:&error];
     
     // then
     XCTAssertEqual(error.code, QuestionBuilderDataError);
@@ -85,7 +83,7 @@ static NSString *StringIsNotJson = @"Not JSON";
     NSError *error = nil;
     
     // when
-    NSArray *questions = [_questionBuilder questionsFromJson:QuestionJson error:&error];
+    NSArray *questions = [_questionBuilder questionsFromJson:QuestionJsonString error:&error];
     
     // then
     XCTAssertEqual(questions.count, 1);
@@ -104,11 +102,8 @@ static NSString *StringIsNotJson = @"Not JSON";
 }
 
 - (void)testQuestionCreatedFromEmptyObjectIsStillValidObject {
-    // given
-    NSString *emptyQuestion = @"{\"items\":[ { } ]}";
-    
     // when
-    NSArray *questions = [_questionBuilder questionsFromJson:emptyQuestion error:NULL];
+    NSArray *questions = [_questionBuilder questionsFromJson:EmptyQuestionsJsonString error:NULL];
     
     // then
     XCTAssertEqual(questions.count, 1, @"QuestionBuilder must handle partial input");
@@ -119,7 +114,7 @@ static NSString *StringIsNotJson = @"Not JSON";
 }
 
 - (void)testBuildingQuestionBodyWithNoQuestionCannotBeTried {
-    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:nil fromJson:QuestionJson], @"No reason to expect that a nil question is passed");
+    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:nil fromJson:QuestionJsonString], @"No reason to expect that a nil question is passed");
 }
 
 - (void)testNonJsonDataDoesNotCauseABodyToBeAddedToAQuestion {
@@ -128,6 +123,14 @@ static NSString *StringIsNotJson = @"Not JSON";
     
     // then
     XCTAssertNil(_question.body, @"Body should not have been added");
+}
+
+- (void)testJsonWhichDoesNotContainABodyDoesNotCauseBodyToBeAdded {
+    // when
+    [_questionBuilder fillInDetailsForQuestion:_question fromJson:NoQuestionsJsonString];
+    
+    // then
+    XCTAssertNil(_question.body, @"There was no body to add");
 }
 
 @end

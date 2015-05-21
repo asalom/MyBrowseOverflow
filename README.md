@@ -39,7 +39,8 @@ At the time I reached out Graham's book, StackOverflow had already shutdown thei
         "last_edit_date": 1432119740,
         "question_id": 30347541,
         "link": "http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect",
-        "title": "Submit test version on iTunesConnect"
+        "title": "Submit test version on iTunesConnect",
+        "body": "<p>Maybe is not the more appropriate place where ask this question and in this case I apologize.</p>"
     }],
     "has_more": true,
     "quota_max": 10000,

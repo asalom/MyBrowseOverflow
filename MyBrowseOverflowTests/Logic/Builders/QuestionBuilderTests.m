@@ -14,6 +14,7 @@
 #import "Person.h"
 
 static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mobile\",\"itunesconnect\"],\"owner\":{\"reputation\":3846,\"user_id\":980344,\"user_type\":\"registered\",\"accept_rate\":53,\"profile_image\":\"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209\",\"display_name\":\"Alex Salom\",\"link\":\"http://stackoverflow.com/users/980344/velthune\"},\"is_answered\":false,\"view_count\":11,\"answer_count\":1,\"score\":2,\"last_activity_date\":1432119740,\"creation_date\":1432119146,\"last_edit_date\":1432119740,\"question_id\":30347541,\"link\":\"http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect\",\"title\":\"Submit test version on iTunesConnect\"}],\"has_more\":true,\"quota_max\":10000,\"quota_remaining\":9994}";
+static NSString *StringIsNotJson = @"Not JSON";
 
 @interface QuestionBuilderTests : XCTestCase
 
@@ -41,7 +42,7 @@ static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mo
 }
 
 - (void)testNilReturnedWhenStringIsNotJson {
-    XCTAssertNil([_questionBuilder questionsFromJson:@"Not JSON" error:NULL], @"This parameter should not be parsable");
+    XCTAssertNil([_questionBuilder questionsFromJson:StringIsNotJson error:NULL], @"This parameter should not be parsable");
 }
 
 - (void)testErrorSetWhenStringIsNotJson {
@@ -49,14 +50,14 @@ static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mo
     NSError *error = nil;
     
     // when
-    [_questionBuilder questionsFromJson:@"Not JSON" error:&error];
+    [_questionBuilder questionsFromJson:StringIsNotJson error:&error];
     
     // then
     XCTAssertNotNil(error, @"An error occurred, we should be told");
 }
 
 - (void)testPassingNullErrorDoesNotCauseCrash {
-    XCTAssertNoThrow([_questionBuilder questionsFromJson:@"Not JSON" error:NULL], @"Using a NULL error parameter should not be a problem");
+    XCTAssertNoThrow([_questionBuilder questionsFromJson:StringIsNotJson error:NULL], @"Using a NULL error parameter should not be a problem");
 }
 
 - (void)testRealJsonWithoutQuestionsArrayIsError {
@@ -118,7 +119,15 @@ static NSString *QuestionJson = @"{\"items\":[{\"tags\":[\"ios\",\"iphone\",\"mo
 }
 
 - (void)testBuildingQuestionBodyWithNoQuestionCannotBeTried {
-    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:nil fromJson:QuestionJson]);
+    XCTAssertThrows([_questionBuilder fillInDetailsForQuestion:nil fromJson:QuestionJson], @"No reason to expect that a nil question is passed");
+}
+
+- (void)testNonJsonDataDoesNotCauseABodyToBeAddedToAQuestion {
+    // when
+    [_questionBuilder fillInDetailsForQuestion:_question fromJson:StringIsNotJson];
+    
+    // then
+    XCTAssertNil(_question.body, @"Body should not have been added");
 }
 
 @end

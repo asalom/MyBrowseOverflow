@@ -55,7 +55,6 @@ static NSString * const QuestionBuilderErrorDomain = @"QuestionBuilderErrorDomai
     return [results copy];
 }
 
-
 - (void)fillInDetailsForQuestion:(Question *)question fromJson:(NSString *)objectNotation {
     NSParameterAssert(question != nil);
     NSParameterAssert(objectNotation != nil);

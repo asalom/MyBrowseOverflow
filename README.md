@@ -11,39 +11,39 @@ At the time I reached out Graham's book, StackOverflow had already shutdown thei
 
 ## JSON objects used for testing
 ### Question
-[/2.2/questions/30347541?filter=withbody&site=stackoverflow](http://api.stackexchange.com/2.2/questions/30347541?filter=withbody&site=stackoverflow)
+[/2.2/questions/11047351?filter=withbody&site=stackoverflow](http://api.stackexchange.com/2.2/questions/11047351?filter=withbody&site=stackoverflow)
 ```json
 {
     "items": [
     {
         "tags": [
-            "ios",
-            "iphone",
-            "mobile",
-            "itunesconnect"
+            "objective-c",
+            "properties",
+            "protected"
         ],
         "owner":{
-            "reputation": 3846,
-            "user_id": 980344,
+            "reputation": 647,
+            "user_id": 1266056,
             "user_type": "registered",
-            "accept_rate": 53,
+            "accept_rate": 100,
             "profile_image": "https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209",
             "display_name": "Alex Salom",
-            "link": "http://stackoverflow.com/users/980344/velthune"
+            "link": "http://stackoverflow.com/users/1266056/alex-salom"
         },
-        "is_answered": false,
-        "view_count": 11,
-        "answer_count": 1,
-        "score": 2,
-        "last_activity_date": 1432119740,
-        "creation_date": 1432119146,
-        "last_edit_date": 1432119740,
-        "question_id": 30347541,
-        "link": "http://stackoverflow.com/questions/30347541/submit-test-version-on-itunesconnect",
-        "title": "Submit test version on iTunesConnect",
-        "body": "<p>Maybe is not the more appropriate place where ask this question and in this case I apologize.</p>"
+            "is_answered": true,
+            "view_count": 7051,
+            "accepted_answer_id": 11047650,
+            "answer_count": 3,
+            "score": 28,
+            "last_activity_date": 1401541337,
+            "creation_date": 1339749908,
+            "last_edit_date": 1401541337,
+            "question_id": 11047351,
+            "link": "http://stackoverflow.com/questions/11047351/workaround-to-accomplish-protected-properties-in-objective-c",
+            "title": "Workaround to accomplish protected properties in Objective-C",
+            "body": "<p>I've been trying to find a workaround to declare @protected properties in Objective-C so only subclasses in the hierarchy can access them (read only, not write).</p>"
     }],
-    "has_more": true,
+    "has_more": false,
     "quota_max": 10000,
     "quota_remaining": 9994
 }

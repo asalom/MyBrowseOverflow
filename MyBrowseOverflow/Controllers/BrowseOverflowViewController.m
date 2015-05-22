@@ -9,29 +9,17 @@
 #import "BrowseOverflowViewController.h"
 
 @interface BrowseOverflowViewController ()
-
+@property (nonatomic, assign) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) id<UITableViewDataSource> dataSource;
+@property (nonatomic, assign) id<UITableViewDelegate> delegate;
 @end
 
 @implementation BrowseOverflowViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tableView.dataSource = self.dataSource;
+    self.tableView.delegate = self.delegate;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "TopicTableViewDataSource.h"
+#import "Topic.h"
 
 @implementation TopicTableViewDataSource
 
@@ -16,7 +17,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    NSParameterAssert(indexPath.section == 0);
+    NSParameterAssert(indexPath.row < self.topics.count);
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    Topic *topic = self.topics[indexPath.row];
+    cell.textLabel.text = topic.name;
+    return cell;
 }
 
 @end

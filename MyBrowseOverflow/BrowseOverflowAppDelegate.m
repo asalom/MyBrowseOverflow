@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 Alex Salom © alexsalom.es. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "DetailViewController.h"
+#import "BrowseOverflowAppDelegate.h"
 
-@interface AppDelegate ()
+@interface BrowseOverflowAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation BrowseOverflowAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

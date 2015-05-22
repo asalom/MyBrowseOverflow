@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F17574B1B0610AC0085EFA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17574A1B0610AC0085EFA8 /* main.m */; };
-		3F17574E1B0610AC0085EFA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17574D1B0610AC0085EFA8 /* AppDelegate.m */; };
-		3F1757511B0610AC0085EFA8 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757501B0610AC0085EFA8 /* MasterViewController.m */; };
-		3F1757541B0610AC0085EFA8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757531B0610AC0085EFA8 /* DetailViewController.m */; };
+		3F17574E1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17574D1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m */; };
 		3F1757571B0610AC0085EFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1757551B0610AC0085EFA8 /* Main.storyboard */; };
 		3F1757591B0610AC0085EFA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1757581B0610AC0085EFA8 /* Images.xcassets */; };
 		3F17575C1B0610AC0085EFA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F17575A1B0610AC0085EFA8 /* LaunchScreen.xib */; };
@@ -30,6 +28,7 @@
 		3FA263011B0DF5110062ECDE /* InspectableStackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA263001B0DF5110062ECDE /* InspectableStackOverflowCommunicator.m */; };
 		3FA263051B0E139E0062ECDE /* NoNetworkedStackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA263041B0E139E0062ECDE /* NoNetworkedStackOverflowCommunicator.m */; };
 		3FBA26901B0F183100B65F33 /* FakeUrlResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA268F1B0F183100B65F33 /* FakeUrlResponse.m */; };
+		3FBA269A1B0F490500B65F33 /* BrowseOverflowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA26991B0F490500B65F33 /* BrowseOverflowViewController.m */; };
 		3FC6D2741B09FC520013A0A2 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2731B09FC520013A0A2 /* Answer.m */; };
 		3FC6D2761B09FC5B0013A0A2 /* AnswerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2751B09FC5B0013A0A2 /* AnswerTests.m */; };
 		3FC6D2791B0A1F120013A0A2 /* QuestionCreationWorkflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2781B0A1F120013A0A2 /* QuestionCreationWorkflowTests.m */; };
@@ -54,12 +53,8 @@
 		3F1757451B0610AC0085EFA8 /* MyBrowseOverflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBrowseOverflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1757491B0610AC0085EFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F17574A1B0610AC0085EFA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3F17574C1B0610AC0085EFA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3F17574D1B0610AC0085EFA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3F17574F1B0610AC0085EFA8 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		3F1757501B0610AC0085EFA8 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		3F1757521B0610AC0085EFA8 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		3F1757531B0610AC0085EFA8 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		3F17574C1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseOverflowAppDelegate.h; sourceTree = "<group>"; };
+		3F17574D1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseOverflowAppDelegate.m; sourceTree = "<group>"; };
 		3F1757561B0610AC0085EFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F1757581B0610AC0085EFA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F17575B1B0610AC0085EFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -93,6 +88,8 @@
 		3FA263041B0E139E0062ECDE /* NoNetworkedStackOverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetworkedStackOverflowCommunicator.m; sourceTree = "<group>"; };
 		3FBA268E1B0F183100B65F33 /* FakeUrlResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeUrlResponse.h; sourceTree = "<group>"; };
 		3FBA268F1B0F183100B65F33 /* FakeUrlResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeUrlResponse.m; sourceTree = "<group>"; };
+		3FBA26981B0F490500B65F33 /* BrowseOverflowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseOverflowViewController.h; sourceTree = "<group>"; };
+		3FBA26991B0F490500B65F33 /* BrowseOverflowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseOverflowViewController.m; sourceTree = "<group>"; };
 		3FC6D2721B09FC520013A0A2 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
 		3FC6D2731B09FC520013A0A2 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		3FC6D2751B09FC5B0013A0A2 /* AnswerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTests.m; sourceTree = "<group>"; };
@@ -172,12 +169,9 @@
 			children = (
 				3F1757721B06255A0085EFA8 /* Model */,
 				3FC6D27A1B0A1F3C0013A0A2 /* Logic */,
-				3F17574C1B0610AC0085EFA8 /* AppDelegate.h */,
-				3F17574D1B0610AC0085EFA8 /* AppDelegate.m */,
-				3F17574F1B0610AC0085EFA8 /* MasterViewController.h */,
-				3F1757501B0610AC0085EFA8 /* MasterViewController.m */,
-				3F1757521B0610AC0085EFA8 /* DetailViewController.h */,
-				3F1757531B0610AC0085EFA8 /* DetailViewController.m */,
+				3FBA26971B0F48C800B65F33 /* Controllers */,
+				3F17574C1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.h */,
+				3F17574D1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m */,
 				3F1757551B0610AC0085EFA8 /* Main.storyboard */,
 				3F1757581B0610AC0085EFA8 /* Images.xcassets */,
 				3F17575A1B0610AC0085EFA8 /* LaunchScreen.xib */,
@@ -283,6 +277,15 @@
 				3FA263001B0DF5110062ECDE /* InspectableStackOverflowCommunicator.m */,
 			);
 			path = Inspectables;
+			sourceTree = "<group>";
+		};
+		3FBA26971B0F48C800B65F33 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3FBA26981B0F490500B65F33 /* BrowseOverflowViewController.h */,
+				3FBA26991B0F490500B65F33 /* BrowseOverflowViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		3FC6D2771B0A1EF30013A0A2 /* Logic */ = {
@@ -458,8 +461,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6547421B0B4E9A0016B5E9 /* QuestionBuilder.m in Sources */,
-				3F17574E1B0610AC0085EFA8 /* AppDelegate.m in Sources */,
-				3F1757511B0610AC0085EFA8 /* MasterViewController.m in Sources */,
+				3F17574E1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m in Sources */,
+				3FBA269A1B0F490500B65F33 /* BrowseOverflowViewController.m in Sources */,
 				3F1757821B063C700085EFA8 /* Person.m in Sources */,
 				3FC6D2851B0A24470013A0A2 /* StackOverflowCommunicator.m in Sources */,
 				3FC6D2741B09FC520013A0A2 /* Answer.m in Sources */,
@@ -469,7 +472,6 @@
 				3F5D270F1B0CCA1A00A9907C /* PersonBuilder.m in Sources */,
 				3F1757771B0625DF0085EFA8 /* Topic.m in Sources */,
 				3FC6D27D1B0A1F4F0013A0A2 /* StackOverflowManager.m in Sources */,
-				3F1757541B0610AC0085EFA8 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

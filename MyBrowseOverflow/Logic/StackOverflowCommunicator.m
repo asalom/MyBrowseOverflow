@@ -10,6 +10,9 @@
 
 @interface StackOverflowCommunicator ()
 @property (strong) NSURLConnection *connection;
+@property (strong) NSMutableData *receivedData;
+@property (strong) NSURL *fetchingUrl;
+@property (strong) NSURLConnection *fetchingConnection;
 @end
 
 NSString * const StackOverflowCommunicatorErrorDomain = @"StackOverflowCommunicatorErrorDomain";
@@ -20,8 +23,13 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 
 @implementation StackOverflowCommunicator
 
+@synthesize receivedData = _receivedData;
+@synthesize fetchingUrl = _fetchingUrl;
+@synthesize fetchingConnection = _fetchingConnection;
+
 - (void)searchForQuestionsWithTag:(NSString *)tag {
-    NSURL *url = [self urlFromBaseString:QuestionsWithTagURL, tag];
+    //NSURL *url = [self urlFromBaseString:QuestionsWithTagURL, tag];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:QuestionsWithTagURL, tag]];
     [self fetchContentAtURL:url
                errorHandler:^(NSError *error) {
                    [self.delegate searchingForQuestionsDidFailWithError:error];
@@ -119,7 +127,7 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_receivedData appendData: data];
+    [_receivedData appendData:data];
 }
 
 @end

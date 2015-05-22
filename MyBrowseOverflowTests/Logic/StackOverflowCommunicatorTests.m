@@ -93,6 +93,8 @@
     NSURLConnection *firstConnection = [_communicator fetchingConnection];
     [_communicator searchForQuestionsWithTag:@"cocoa"];
     NSURLConnection *secondConnection = [_communicator fetchingConnection];
+    
+    // then
     XCTAssertNotEqualObjects(firstConnection, secondConnection, @"The communicator needs to replace its URLConnection to start a new one");
     [_communicator cancelAndDiscardUrlConnection];
 }
@@ -168,18 +170,65 @@
     XCTAssertEqualObjects(combinedString, @"Result appended");
 }
 
-#pragma mark - StackOverflowCommunicatorDelegate
+- (void)testSuccessfulSearchForQuestionBodyPassesDataToDelegate {
+    // given
+    _communicator.receivedData = _receivedData;
+    
+    // when
+    [_communicator downloadInformationForQuestionWithId:12345];
+    [_communicator connectionDidFinishLoading:nil];
+    
+    // then
+    XCTAssertNotNil(_resultFromDelegate, @"Searching for a question's body should return data to the delegate");
+}
 
+- (void)testConnectionFailingWhileRetrievingQuestionBodyPassesErrorToDelegate {
+    // given
+    NSError *error = [NSError errorWithDomain:@"Fake domain" code:12345 userInfo:nil];
+    
+    // when
+    [_communicator downloadInformationForQuestionWithId:12345];
+    [_communicator connection:nil didFailWithError:error];
+    
+    // then
+    XCTAssertEqual(_errorFromDelegate.code, 12345, @"Failure to connect should get passed to the delegate");
+}
+
+- (void)testSuccessfulSearchForAnswersPassesDataToDelegate {
+    // given
+    _communicator.receivedData = _receivedData;
+    
+    // when
+    [_communicator downloadAnswersToQuestionWithId:12345];
+    [_communicator connectionDidFinishLoading:nil];
+    
+    // then
+    XCTAssertNotNil(_resultFromDelegate, @"Searching for a question's body should return data to the delegate");
+}
+
+- (void)testConnectionFailingWhileRetrievingAnswersPassesErrorToDelegate {
+    // given
+    NSError *error = [NSError errorWithDomain:@"Fake domain" code:12345 userInfo:nil];
+    
+    // when
+    [_communicator downloadAnswersToQuestionWithId:12345];
+    [_communicator connection:nil didFailWithError:error];
+    
+    // then
+    XCTAssertEqual(_errorFromDelegate.code, 12345, @"Failure to connect should get passed to the delegate");
+}
+
+#pragma mark - StackOverflowCommunicatorDelegate
 - (void)searchingForQuestionsDidFailWithError:(NSError *)error {
     _errorFromDelegate = error;
 }
 
 - (void)fetchingQuestionBodyDidWithError:(NSError *)error {
-    XCTAssert(@"Not implemented");
+    _errorFromDelegate = error;
 }
 
 - (void)fetchingAnswersDidFailWithError:(NSError *)error {
-    XCTAssert(@"Not implemented");
+    _errorFromDelegate = error;
 }
 
 - (void)didReceiveQuestionsJson:(NSString *)objectNotation {
@@ -187,11 +236,11 @@
 }
 
 - (void)didReceiveAnswerArrayJson:(NSString *)objectNotation {
-    XCTAssert(@"Not implemented");
+    _resultFromDelegate = objectNotation;
 }
 
 - (void)didReceiveQuestionBodyJson:(NSString *)objectNotation {
-    XCTAssert(@"Not implemented");
+    _resultFromDelegate = objectNotation;
 }
 
 

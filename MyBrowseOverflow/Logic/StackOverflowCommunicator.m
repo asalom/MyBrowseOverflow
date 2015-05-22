@@ -28,7 +28,6 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 @synthesize fetchingConnection = _fetchingConnection;
 
 - (void)searchForQuestionsWithTag:(NSString *)tag {
-    //NSURL *url = [self urlFromBaseString:QuestionsWithTagURL, tag];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:QuestionsWithTagURL, tag]];
     [self fetchContentAtURL:url
                errorHandler:^(NSError *error) {
@@ -39,7 +38,7 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 }
 
 - (void)downloadInformationForQuestionWithId:(NSInteger)questionId {
-    NSURL *url = [self urlFromBaseString:BodyFromQuestionIdURL, @(questionId)];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:BodyFromQuestionIdURL, @(questionId)]];
     [self fetchContentAtURL:url
                errorHandler:^(NSError *error) {
                    [self.delegate fetchingQuestionBodyDidWithError:error];
@@ -49,7 +48,7 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 }
 
 - (void)downloadAnswersToQuestionWithId:(NSInteger)questionId {
-    NSURL *url = [self urlFromBaseString:AnswersToQuestionIdURL, @(questionId)];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:AnswersToQuestionIdURL, @(questionId)]];
     [self fetchContentAtURL:url
                errorHandler:^(NSError *error) {
                    [self.delegate fetchingAnswersDidFailWithError:error];
@@ -60,15 +59,6 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 
 - (NSURL *)questionsURLWithTag:(NSString *)tag {
     NSString *urlString = [NSString stringWithFormat:QuestionsWithTagURL, tag];
-    return [NSURL URLWithString:urlString];
-}
-
-- (NSURL *)urlFromBaseString:(NSString *)baseString, ... {
-    va_list args;
-    va_start(args, baseString);
-    NSString *urlString = [[NSString alloc] initWithFormat:baseString arguments:args];
-    va_end(args);
-    
     return [NSURL URLWithString:urlString];
 }
 
@@ -83,16 +73,12 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
 
 - (void)launchConnectionForRequest:(NSURLRequest *)request {
     [self cancelAndDiscardUrlConnection];
-    _fetchingConnection = [self connectionWithRequest:request];
+    _fetchingConnection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 - (void)cancelAndDiscardUrlConnection {
     [_fetchingConnection cancel];
     _fetchingConnection = nil;
-}
-
-- (NSURLConnection *)connectionWithRequest:(NSURLRequest *)request {
-    return [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 #pragma mark - NSURLConnectionDelegate

@@ -29,7 +29,4 @@ extern NSString * const StackOverflowCommunicatorErrorDomain;
 - (void)downloadAnswersToQuestionWithId:(NSInteger)questionId;
 - (void)cancelAndDiscardUrlConnection;
 
-// Factory
-- (NSURLConnection *)connectionWithRequest:(NSURLRequest *)request;
-
 @end

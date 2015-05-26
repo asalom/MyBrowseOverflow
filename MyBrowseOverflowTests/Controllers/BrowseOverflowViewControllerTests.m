@@ -159,6 +159,7 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 }
 
 - (void)testViewControllerDoesNotReceiveTableSelectNotificationAfterViewWillDisappear {
+#warning revisar este método
     // given
     [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:_testUserDidSelectTopic selector:_realUserDidSelectTopic];
     

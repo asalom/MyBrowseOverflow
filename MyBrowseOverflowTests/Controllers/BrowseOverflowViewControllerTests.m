@@ -10,7 +10,6 @@
 #import <XCTest/XCTest.h>
 #import "BrowseOverflowViewController.h"
 #import "TopicTableViewDataSource.h"
-#import "TopicTableViewDelegate.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -26,7 +25,6 @@
 @implementation BrowseOverflowViewControllerTests {
     BrowseOverflowViewController *_viewController;
     UITableView *_tableView;
-    TopicTableViewDelegate *_delegate;
     id<UITableViewDataSource> _dataSource;
 }
 
@@ -36,14 +34,11 @@
     _tableView = [[UITableView alloc] init];
     _viewController.tableView = _tableView;
     _dataSource = [[TopicTableViewDataSource alloc] init];
-    _delegate = [[TopicTableViewDelegate alloc] init];
     _viewController.dataSource = _dataSource;
-    _viewController.delegate = _delegate;
 }
 
 - (void)tearDown {
     _viewController = nil;
-    _delegate = nil;
     _dataSource = nil;
     _tableView = nil;
     [super tearDown];
@@ -65,14 +60,6 @@
     XCTAssertTrue(dataSourceProperty != NULL, @"BrowseOverflowViewController needs a data source");
 }
 
-- (void)testViewControllerHasATableViewDelegateProperty {
-    // given
-    objc_property_t tableViewDelegateProperty = class_getProperty([_viewController class], "delegate");
-    
-    // then
-    XCTAssertTrue(tableViewDelegateProperty != NULL, @"BrowseOverflowViewController needs a table view delegate");
-}
-
 - (void)testViewControllerConnectsDataSourceInViewDidLoad {
     // given
     [_viewController view];
@@ -86,15 +73,7 @@
     [_viewController view];
     
     // then
-    XCTAssertEqualObjects(_tableView.delegate, _delegate, @"View controller should have set the table view's delegate");
-}
-
-- (void)testViewControllerConnectsDataSourceToDelegate {
-    // given
-    [_viewController view];
-    
-    // then
-    XCTAssertEqualObjects(_delegate.tableViewDataSource, _dataSource, @"The view controller should tell the table view delegate about its data source");
+    XCTAssertEqualObjects(_tableView.delegate, _dataSource, @"View controller should have set the table view's delegate");
 }
 
 @end

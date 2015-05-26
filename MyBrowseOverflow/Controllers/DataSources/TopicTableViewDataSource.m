@@ -9,6 +9,8 @@
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 
+static NSString * const TopicTableDidSelectTopicNotification = @"TopicTableDidSelectTopicNotification";
+
 @implementation TopicTableViewDataSource
 
 - (Topic *)topicForIndexPath:(NSIndexPath *)indexPath {
@@ -31,6 +33,11 @@
     Topic *topic = [self topicForIndexPath:indexPath];
     cell.textLabel.text = topic.name;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification
+                                                        object:self.topics[indexPath.row]];
 }
 
 @end

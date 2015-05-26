@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 @class Topic;
 
-@interface TopicTableViewDataSource : NSObject <UITableViewDataSource>
+static NSString * const TopicTableDidSelectTopicNotification;
+
+@interface TopicTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (strong) NSArray *topics;
 
 - (Topic *)topicForIndexPath:(NSIndexPath *)indexPath;

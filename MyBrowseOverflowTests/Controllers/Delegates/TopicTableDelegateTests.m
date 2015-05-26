@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "TopicTableViewDelegate.h"
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 
@@ -19,17 +18,14 @@
 @implementation TopicTableDelegateTests {
     NSNotification *_receivedNotification;
     TopicTableViewDataSource *_dataSource;
-    TopicTableViewDelegate *_delegate;
     Topic *_iPhoneTopic;
 }
 
 - (void)setUp {
     [super setUp];
     _dataSource = [[TopicTableViewDataSource alloc] init];
-    _delegate = [[TopicTableViewDelegate alloc] init];
     _iPhoneTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     _dataSource.topics = @[_iPhoneTopic];
-    _delegate.tableViewDataSource = _dataSource;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveNotification:)
                                                  name:TopicTableDidSelectTopicNotification
@@ -38,7 +34,6 @@
 
 - (void)tearDown {
     _dataSource = nil;
-    _delegate = nil;
     _iPhoneTopic = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super tearDown];
@@ -49,7 +44,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
     // when
-    [_delegate tableView:nil didSelectRowAtIndexPath:indexPath];
+    [_dataSource tableView:nil didSelectRowAtIndexPath:indexPath];
     
     // then
     XCTAssertEqualObjects(_receivedNotification.name, @"TopicTableDidSelectTopicNotification", @"The delegate should notify that a topic was selected");

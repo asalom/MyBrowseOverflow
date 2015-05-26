@@ -159,12 +159,18 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 }
 
 - (void)testViewControllerDoesNotReceiveTableSelectNotificationAfterViewWillDisappear {
+    // given
+    [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:_testUserDidSelectTopic selector:_realUserDidSelectTopic];
+    
     // when
     [_viewController viewDidAppear:NO];
     [_viewController viewWillDisappear:NO];
     
     // then
     XCTAssertNil(objc_getAssociatedObject(_viewController, NotificationKey), @"After -viewWillDisappear: is called, the view controller should no longer respond to topic selection notifications");
+    
+    // clean up
+    [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:_testUserDidSelectTopic selector:_realUserDidSelectTopic];
 }
 
 - (void)testViewControllerCallsSuperViewDidAppear {

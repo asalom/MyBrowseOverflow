@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Topic;
 
 @interface TopicTableViewDataSource : NSObject <UITableViewDataSource>
 @property (strong) NSArray *topics;
+
+- (Topic *)topicForIndexPath:(NSIndexPath *)indexPath;
+
 @end

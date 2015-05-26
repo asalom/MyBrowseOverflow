@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "BrowseOverflowViewController.h"
 #import "TopicTableViewDataSource.h"
-#import "EmptyTableViewDelegate.h"
+#import "TopicTableViewDelegate.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -26,6 +26,8 @@
 @implementation BrowseOverflowViewControllerTests {
     BrowseOverflowViewController *_viewController;
     UITableView *_tableView;
+    TopicTableViewDelegate *_delegate;
+    id<UITableViewDataSource> _dataSource;
 }
 
 - (void)setUp {
@@ -33,10 +35,16 @@
     _viewController = [BrowseOverflowViewController alloc];
     _tableView = [[UITableView alloc] init];
     _viewController.tableView = _tableView;
+    _dataSource = [[TopicTableViewDataSource alloc] init];
+    _delegate = [[TopicTableViewDelegate alloc] init];
+    _viewController.dataSource = _dataSource;
+    _viewController.delegate = _delegate;
 }
 
 - (void)tearDown {
     _viewController = nil;
+    _delegate = nil;
+    _dataSource = nil;
     _tableView = nil;
     [super tearDown];
 }
@@ -65,29 +73,28 @@
     XCTAssertTrue(tableViewDelegateProperty != NULL, @"BrowseOverflowViewController needs a table view delegate");
 }
 
-- (void)testDataSourcePropertyConformsToDataTableViewSourceProtocol {
-#warning unimplemented
-
-}
-
 - (void)testViewControllerConnectsDataSourceInViewDidLoad {
     // given
-    id<UITableViewDataSource> dataSource = [[TopicTableViewDataSource alloc] init];
-    _viewController.dataSource = dataSource;
     [_viewController view];
     
     // then
-    XCTAssertEqualObjects(_tableView.dataSource, dataSource, @"View controller should have set the table view's data source");
+    XCTAssertEqualObjects(_tableView.dataSource, _dataSource, @"View controller should have set the table view's data source");
 }
 
 - (void)testViewControllerConnectsDelegateInViewDidLoad {
     // given
-    id<UITableViewDelegate> delegate = [[EmptyTableViewDelegate alloc] init];
-    _viewController.delegate = delegate;
     [_viewController view];
     
     // then
-    XCTAssertEqualObjects(_tableView.delegate, delegate, @"View controller should have set the table view's delegate");
+    XCTAssertEqualObjects(_tableView.delegate, _delegate, @"View controller should have set the table view's delegate");
+}
+
+- (void)testViewControllerConnectsDataSourceToDelegate {
+    // given
+    [_viewController view];
+    
+    // then
+    XCTAssertEqualObjects(_delegate.tableViewDataSource, _dataSource, @"The view controller should tell the table view delegate about its data source");
 }
 
 @end

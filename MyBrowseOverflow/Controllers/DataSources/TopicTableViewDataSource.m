@@ -11,6 +11,10 @@
 
 @implementation TopicTableViewDataSource
 
+- (Topic *)topicForIndexPath:(NSIndexPath *)indexPath {
+    return self.topics[indexPath.row];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSParameterAssert(section == 0);
     return self.topics.count;
@@ -19,8 +23,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSParameterAssert(indexPath.section == 0);
     NSParameterAssert(indexPath.row < self.topics.count);
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    Topic *topic = self.topics[indexPath.row];
+    static NSString *reuseIdentifier = @"TopicCellReuseIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    Topic *topic = [self topicForIndexPath:indexPath];
     cell.textLabel.text = topic.name;
     return cell;
 }

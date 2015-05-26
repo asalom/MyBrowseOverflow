@@ -7,11 +7,13 @@
 //
 
 #import "BrowseOverflowViewController.h"
+#import "TopicTableViewDelegate.h"
+#import "TopicTableViewDataSource.h"
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) id<UITableViewDataSource> dataSource;
-@property (nonatomic, assign) id<UITableViewDelegate> delegate;
+@property (nonatomic, assign) TopicTableViewDataSource *dataSource;
+@property (nonatomic, assign) TopicTableViewDelegate *delegate;
 @end
 
 @implementation BrowseOverflowViewController
@@ -20,6 +22,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self.dataSource;
     self.tableView.delegate = self.delegate;
+    self.delegate.tableViewDataSource = self.dataSource;
 }
 
 @end

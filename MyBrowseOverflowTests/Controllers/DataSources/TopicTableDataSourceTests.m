@@ -23,7 +23,7 @@
 - (void)setUp {
     [super setUp];
     _dataSource = [[TopicTableViewDataSource alloc] init];
-    Topic *sampleTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"ios"];
+    Topic *sampleTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     _topicsList = @[sampleTopic];
     _dataSource.topics = _topicsList;
 }
@@ -81,15 +81,38 @@
 }
 
 - (void)testCellCreatedByDataSourceContainsTopicTitleAsTextLabel {
-    // when
+    // given
     NSIndexPath *firstTopic = [NSIndexPath indexPathForRow:0 inSection:0];
     
-    // given
+    // when
     UITableViewCell *firstCell = [_dataSource tableView:nil cellForRowAtIndexPath:firstTopic];
     NSString *cellTitle = firstCell.textLabel.text;
     
     // then
-    XCTAssertEqualObjects(@"iPhone", cellTitle, @"Cell0s title should be equal to the topic's title");
+    XCTAssertEqualObjects(@"iPhone", cellTitle, @"Cell's title should be equal to the topic's title");
+}
+
+- (void)testCellContainsReuseIdentifier {
+    // given
+    NSIndexPath *firstTopic = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    // when
+    UITableViewCell *firstCell = [_dataSource tableView:nil cellForRowAtIndexPath:firstTopic];
+    NSString *reuseIdentifier = firstCell.reuseIdentifier;
+    
+    // then
+    XCTAssertEqualObjects(@"TopicCellReuseIdentifier", reuseIdentifier, @"Reuse identifier should be set to TopicCellReuseIdentifier");
+}
+
+- (void)testDataSourceIndicatesWhichTipicIsRepresentedForAnIndexPath {
+    // given
+    NSIndexPath *firstRow = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    // when
+    Topic *firstTopic = [_dataSource topicForIndexPath:firstRow];
+    
+    // then
+    XCTAssertEqualObjects(firstTopic.tag, @"iphone", @"The iPhone Topic is at row 0");
 }
 
 @end

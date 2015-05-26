@@ -130,11 +130,17 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 }
 
 - (void)testDefaultStateOfViewControllerDoesNotReceiveNotifications {
+    // given
+    [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:_realUserDidSelectTopic selector:_testUserDidSelectTopic];
+    
     // when
     [[NSNotificationCenter defaultCenter] postNotificationName:TopicTableDidSelectTopicNotification object:nil];
     
     // then
     XCTAssertNil(objc_getAssociatedObject(_viewController, NotificationKey), @"Notification should not be received before viewDidAppear:");
+    
+    // clean up
+    [BrowseOverflowViewControllerTests swapInstanceMethodsForClass:[BrowseOverflowViewController class] selector:_realUserDidSelectTopic selector:_testUserDidSelectTopic];
 }
 
 - (void)testViewControllerReceivesTopicSelectionNotificationAfterViewDidAppear {

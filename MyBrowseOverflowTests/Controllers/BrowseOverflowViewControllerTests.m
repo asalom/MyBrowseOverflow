@@ -25,7 +25,7 @@
 @implementation BrowseOverflowViewControllerTests {
     BrowseOverflowViewController *_viewController;
     UITableView *_tableView;
-    id<UITableViewDataSource> _dataSource;
+    id<UITableViewDataSource, UITableViewDelegate> _dataSource;
 }
 
 - (void)setUp {

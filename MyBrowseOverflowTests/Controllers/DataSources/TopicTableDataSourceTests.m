@@ -104,15 +104,4 @@
     XCTAssertEqualObjects(@"TopicCellReuseIdentifier", reuseIdentifier, @"Reuse identifier should be set to TopicCellReuseIdentifier");
 }
 
-- (void)testDataSourceIndicatesWhichTipicIsRepresentedForAnIndexPath {
-    // given
-    NSIndexPath *firstRow = [NSIndexPath indexPathForRow:0 inSection:0];
-    
-    // when
-    Topic *firstTopic = [_dataSource topicForIndexPath:firstRow];
-    
-    // then
-    XCTAssertEqualObjects(firstTopic.tag, @"iphone", @"The iPhone Topic is at row 0");
-}
-
 @end

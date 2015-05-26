@@ -11,7 +11,7 @@
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) TopicTableViewDataSource *dataSource;
+@property (nonatomic, assign) id<UITableViewDataSource, UITableViewDelegate> dataSource;
 @end
 
 @implementation BrowseOverflowViewController

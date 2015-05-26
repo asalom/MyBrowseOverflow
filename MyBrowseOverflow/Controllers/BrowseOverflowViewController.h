@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Topic;
 
 @interface BrowseOverflowViewController : UIViewController
+
+- (void)userDidSelectTopic:(Topic *)topic;
 
 @end

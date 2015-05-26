@@ -12,7 +12,7 @@
 #import "QuestionBuilder.h"
 #import "Question.h"
 
-static NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
+NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
 
 @implementation StackOverflowManager
 

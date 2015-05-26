@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class Topic;
 
-static NSString * const TopicTableDidSelectTopicNotification;
+extern NSString * const TopicTableDidSelectTopicNotification;
 
 @interface TopicTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (strong) NSArray *topics;

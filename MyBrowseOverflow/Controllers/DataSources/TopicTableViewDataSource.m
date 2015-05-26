@@ -9,7 +9,7 @@
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 
-static NSString * const TopicTableDidSelectTopicNotification = @"TopicTableDidSelectTopicNotification";
+NSString * const TopicTableDidSelectTopicNotification = @"TopicTableDidSelectTopicNotification";
 
 @implementation TopicTableViewDataSource
 

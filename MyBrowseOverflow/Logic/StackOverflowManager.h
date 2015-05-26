@@ -13,7 +13,7 @@
 @class QuestionBuilder;
 @class Question;
 
-static NSString * const StackOverflowManagerError;
+extern NSString * const StackOverflowManagerError;
 
 enum {
     StackOverflowManagerErrorQuestionSearchCode,

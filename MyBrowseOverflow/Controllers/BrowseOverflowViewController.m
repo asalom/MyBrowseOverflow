@@ -8,6 +8,7 @@
 
 #import "BrowseOverflowViewController.h"
 #import "TopicTableViewDataSource.h"
+#import "Topic.h"
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
@@ -20,6 +21,23 @@
     [super viewDidLoad];
     self.tableView.dataSource = self.dataSource;
     self.tableView.delegate = self.dataSource;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidSelectTopic:)
+                                                 name:TopicTableDidSelectTopicNotification
+                                               object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)userDidSelectTopic:(NSNotification *)notification {
+    
 }
 
 @end

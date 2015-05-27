@@ -11,6 +11,6 @@
 
 @interface BrowseOverflowViewController : UIViewController
 
-- (void)userDidSelectTopic:(Topic *)topic;
+- (void)userDidSelectTopicNotification:(NSNotification *)notification;
 
 @end

@@ -26,7 +26,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(userDidSelectTopic:)
+                                             selector:@selector(userDidSelectTopicNotification:)
                                                  name:TopicTableDidSelectTopicNotification
                                                object:nil];
 }
@@ -36,8 +36,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)userDidSelectTopic:(NSNotification *)notification {
-    
+- (void)userDidSelectTopicNotification:(NSNotification *)notification {
+    BrowseOverflowViewController *newController = [[BrowseOverflowViewController alloc] init];
+    [self.navigationController pushViewController:newController animated:YES];
 }
 
 @end

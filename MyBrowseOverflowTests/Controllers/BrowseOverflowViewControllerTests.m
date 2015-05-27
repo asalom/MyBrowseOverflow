@@ -12,6 +12,7 @@
 #import "BrowseOverflowViewController.h"
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
+#import "QuestionListTableViewDataSource.h"
 #import <objc/runtime.h>
 
 static const char *ViewDidAppearKey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
@@ -188,7 +189,22 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
     OCMVerify([mockNavigationController pushViewController:[OCMArg isKindOfClass:[BrowseOverflowViewController class]] animated:YES]);
 }
 
+- (void)testNewViewControllerHasAQuestionListDataSourceForTheSelectedTopic {
+    // given
+    Topic *iPhoneTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
+    NSNotification *iPhoneTopicSelectedNotification = [NSNotification notificationWithName:TopicTableDidSelectTopicNotification object:iPhoneTopic];
+    id mockNavigationController = OCMPartialMock(_navigationController);
+    OCMExpect([mockNavigationController pushViewController:[OCMArg checkWithBlock:^BOOL(BrowseOverflowViewController *obj) {
+        return [obj.dataSource isKindOfClass:[QuestionListTableViewDataSource class]] &&
+        [[(QuestionListTableViewDataSource *)obj.dataSource topic] isEqual:iPhoneTopic];
+    }] animated:YES]);
+    
+    // when
+    [_viewController userDidSelectTopicNotification:iPhoneTopicSelectedNotification];
 
+    // when
+    OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work
+}
 
 @end
 

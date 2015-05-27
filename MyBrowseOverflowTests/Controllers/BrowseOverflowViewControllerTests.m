@@ -203,7 +203,7 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
     [_viewController userDidSelectTopicNotification:iPhoneTopicSelectedNotification];
 
     // when
-    OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work
+    OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
 }
 
 @end

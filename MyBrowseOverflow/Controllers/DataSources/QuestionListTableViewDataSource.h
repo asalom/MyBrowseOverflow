@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class Topic;
+@class QuestionSummaryTableViewCell;
 
 @interface QuestionListTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (strong) Topic *topic;
+@property IBOutlet QuestionSummaryTableViewCell *questionCell;
 @end

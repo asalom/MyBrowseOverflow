@@ -41,6 +41,9 @@
 		3FC6D2851B0A24470013A0A2 /* StackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2841B0A24470013A0A2 /* StackOverflowCommunicator.m */; };
 		3FC6D2881B0A245C0013A0A2 /* MockStackOverflowCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6D2871B0A245C0013A0A2 /* MockStackOverflowCommunicator.m */; };
 		3FD804211B15CE1D001888B8 /* QuestionListTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD804201B15CE1D001888B8 /* QuestionListTableViewDataSource.m */; };
+		3FD804231B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD804221B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m */; };
+		3FD804281B15E5A6001888B8 /* QuestionSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD804271B15E5A6001888B8 /* QuestionSummaryTableViewCell.m */; };
+		3FD8042A1B15F391001888B8 /* QuestionSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD804291B15F391001888B8 /* QuestionSummaryTableViewCell.xib */; };
 		7013F087C768C32C92CD3416 /* libPods-MyBrowseOverflowTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95FEC914494CF580FBA6F3B8 /* libPods-MyBrowseOverflowTests.a */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +118,10 @@
 		3FC6D2871B0A245C0013A0A2 /* MockStackOverflowCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockStackOverflowCommunicator.m; sourceTree = "<group>"; };
 		3FD8041F1B15CE1D001888B8 /* QuestionListTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionListTableViewDataSource.h; sourceTree = "<group>"; };
 		3FD804201B15CE1D001888B8 /* QuestionListTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionListTableViewDataSource.m; sourceTree = "<group>"; };
+		3FD804221B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionListTableViewDataSourceTests.m; sourceTree = "<group>"; };
+		3FD804261B15E5A6001888B8 /* QuestionSummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionSummaryTableViewCell.h; sourceTree = "<group>"; };
+		3FD804271B15E5A6001888B8 /* QuestionSummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionSummaryTableViewCell.m; sourceTree = "<group>"; };
+		3FD804291B15F391001888B8 /* QuestionSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionSummaryTableViewCell.xib; sourceTree = "<group>"; };
 		5AEDAB7444CD8F8F148099D8 /* Pods-MyBrowseOverflowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBrowseOverflowTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyBrowseOverflowTests/Pods-MyBrowseOverflowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A346C43137D220D2BCBB2CF /* Pods-MyBrowseOverflowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBrowseOverflowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyBrowseOverflowTests/Pods-MyBrowseOverflowTests.release.xcconfig"; sourceTree = "<group>"; };
 		95FEC914494CF580FBA6F3B8 /* libPods-MyBrowseOverflowTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyBrowseOverflowTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +189,7 @@
 				3F1757721B06255A0085EFA8 /* Model */,
 				3FC6D27A1B0A1F3C0013A0A2 /* Logic */,
 				3FBA26971B0F48C800B65F33 /* Controllers */,
+				3FD804241B15E571001888B8 /* Views */,
 				3F17574C1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.h */,
 				3F17574D1B0610AC0085EFA8 /* BrowseOverflowAppDelegate.m */,
 				3F1757551B0610AC0085EFA8 /* Main.storyboard */,
@@ -343,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				3FBA26A81B0F630400B65F33 /* TopicTableDataSourceTests.m */,
+				3FD804221B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -382,6 +391,24 @@
 				3FA263041B0E139E0062ECDE /* NoNetworkedStackOverflowCommunicator.m */,
 			);
 			path = Mocking;
+			sourceTree = "<group>";
+		};
+		3FD804241B15E571001888B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3FD804251B15E583001888B8 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3FD804251B15E583001888B8 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3FD804261B15E5A6001888B8 /* QuestionSummaryTableViewCell.h */,
+				3FD804271B15E5A6001888B8 /* QuestionSummaryTableViewCell.m */,
+				3FD804291B15F391001888B8 /* QuestionSummaryTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD8042A1B15F391001888B8 /* QuestionSummaryTableViewCell.xib in Resources */,
 				3F1757571B0610AC0085EFA8 /* Main.storyboard in Resources */,
 				3F17575C1B0610AC0085EFA8 /* LaunchScreen.xib in Resources */,
 				3F1757591B0610AC0085EFA8 /* Images.xcassets in Resources */,
@@ -530,6 +558,7 @@
 				3FD804211B15CE1D001888B8 /* QuestionListTableViewDataSource.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
 				3FA262F91B0DD47F0062ECDE /* AnswerBuilder.m in Sources */,
+				3FD804281B15E5A6001888B8 /* QuestionSummaryTableViewCell.m in Sources */,
 				3F5D270F1B0CCA1A00A9907C /* PersonBuilder.m in Sources */,
 				3F1757771B0625DF0085EFA8 /* Topic.m in Sources */,
 				3FC6D27D1B0A1F4F0013A0A2 /* StackOverflowManager.m in Sources */,
@@ -554,6 +583,7 @@
 				3FBA26901B0F183100B65F33 /* FakeUrlResponse.m in Sources */,
 				3FBA26A91B0F630400B65F33 /* TopicTableDataSourceTests.m in Sources */,
 				3F6547461B0B6BC80016B5E9 /* FakeQuestionBuilder.m in Sources */,
+				3FD804231B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m in Sources */,
 				3FC6D2881B0A245C0013A0A2 /* MockStackOverflowCommunicator.m in Sources */,
 				3FA263011B0DF5110062ECDE /* InspectableStackOverflowCommunicator.m in Sources */,
 				3FA262FD1B0DE8C20062ECDE /* StackOverflowCommunicatorTests.m in Sources */,

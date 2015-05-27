@@ -44,6 +44,7 @@
 		3FD804231B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD804221B15E0A2001888B8 /* QuestionListTableViewDataSourceTests.m */; };
 		3FD804281B15E5A6001888B8 /* QuestionSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD804271B15E5A6001888B8 /* QuestionSummaryTableViewCell.m */; };
 		3FD8042A1B15F391001888B8 /* QuestionSummaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD804291B15F391001888B8 /* QuestionSummaryTableViewCell.xib */; };
+		3FD8042D1B15F7E1001888B8 /* GravatarCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD8042C1B15F7E1001888B8 /* GravatarCommunicator.m */; };
 		7013F087C768C32C92CD3416 /* libPods-MyBrowseOverflowTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95FEC914494CF580FBA6F3B8 /* libPods-MyBrowseOverflowTests.a */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,9 @@
 		3FD804261B15E5A6001888B8 /* QuestionSummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionSummaryTableViewCell.h; sourceTree = "<group>"; };
 		3FD804271B15E5A6001888B8 /* QuestionSummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionSummaryTableViewCell.m; sourceTree = "<group>"; };
 		3FD804291B15F391001888B8 /* QuestionSummaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionSummaryTableViewCell.xib; sourceTree = "<group>"; };
+		3FD8042B1B15F7E1001888B8 /* GravatarCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GravatarCommunicator.h; sourceTree = "<group>"; };
+		3FD8042C1B15F7E1001888B8 /* GravatarCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarCommunicator.m; sourceTree = "<group>"; };
+		3FD8042E1B15F822001888B8 /* GravatarCommunicatorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GravatarCommunicatorDelegate.h; sourceTree = "<group>"; };
 		5AEDAB7444CD8F8F148099D8 /* Pods-MyBrowseOverflowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBrowseOverflowTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyBrowseOverflowTests/Pods-MyBrowseOverflowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A346C43137D220D2BCBB2CF /* Pods-MyBrowseOverflowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyBrowseOverflowTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyBrowseOverflowTests/Pods-MyBrowseOverflowTests.release.xcconfig"; sourceTree = "<group>"; };
 		95FEC914494CF580FBA6F3B8 /* libPods-MyBrowseOverflowTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyBrowseOverflowTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -376,6 +380,9 @@
 				3FC6D2831B0A24470013A0A2 /* StackOverflowCommunicator.h */,
 				3FC6D2841B0A24470013A0A2 /* StackOverflowCommunicator.m */,
 				3FA263021B0E0FE30062ECDE /* StackOverflowCommunicatorDelegate.h */,
+				3FD8042B1B15F7E1001888B8 /* GravatarCommunicator.h */,
+				3FD8042C1B15F7E1001888B8 /* GravatarCommunicator.m */,
+				3FD8042E1B15F822001888B8 /* GravatarCommunicatorDelegate.h */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -557,6 +564,7 @@
 				3F17574B1B0610AC0085EFA8 /* main.m in Sources */,
 				3FD804211B15CE1D001888B8 /* QuestionListTableViewDataSource.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
+				3FD8042D1B15F7E1001888B8 /* GravatarCommunicator.m in Sources */,
 				3FA262F91B0DD47F0062ECDE /* AnswerBuilder.m in Sources */,
 				3FD804281B15E5A6001888B8 /* QuestionSummaryTableViewCell.m in Sources */,
 				3F5D270F1B0CCA1A00A9907C /* PersonBuilder.m in Sources */,

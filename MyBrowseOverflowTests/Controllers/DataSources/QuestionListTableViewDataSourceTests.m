@@ -187,4 +187,16 @@
     OCMVerify([mockNotificationCenter removeObserver:_dataSource name:AvatarStoreDidUpdateContentNotification object:_avatarStore]);
 }
 
+- (void)testQuestionListCausesTableReloadOnAvatarNotification {
+    // given
+    id mockTableView = OCMClassMock([UITableView class]);
+    _dataSource.tableView = mockTableView;
+    
+    // when
+    [_dataSource avatarStoreDidUpdateContent:nil];
+    
+    // then
+    OCMVerify([mockTableView reloadData]);
+}
+
 @end

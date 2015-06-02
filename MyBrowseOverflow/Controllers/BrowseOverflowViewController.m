@@ -40,6 +40,7 @@
 - (void)userDidSelectTopicNotification:(NSNotification *)notification {
     BrowseOverflowViewController *newController = [[BrowseOverflowViewController alloc] init];
     QuestionListTableViewDataSource *dataSource = [[QuestionListTableViewDataSource alloc] init];
+    dataSource.tableView = self.tableView;
     dataSource.topic = notification.object;
     newController.dataSource = dataSource;
     [self.navigationController pushViewController:newController animated:YES];

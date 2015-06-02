@@ -11,8 +11,23 @@
 #import "QuestionSummaryTableViewCell.h"
 #import "Question.h"
 #import "Person.h"
+#import "AvatarStore.h"
+
+@interface QuestionListTableViewDataSource ()
+
+@property (strong) NSNotificationCenter *notificationCenter;
+
+- (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore;
+- (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)avatarStore;
+- (void)avatarStoreDidUpdateContent:(NSNotification *)notification;
+@end
+
 
 @implementation QuestionListTableViewDataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 132.0f;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.topic.recentQuestions.count ? : 1;
@@ -35,6 +50,11 @@
         self.questionCell.nameLabel.text = question.owner.name;
         self.questionCell.titleLabel.text = question.title;
         self.questionCell.scoreLabel.text = [NSString stringWithFormat:@"%d", question.score];
+        NSData *avatarData = [self.avatarStore dataForUrl:question.owner.avatarUrl];
+        if (avatarData) {
+            self.questionCell.avatarView.image = [UIImage imageWithData:avatarData];
+        }
+        
         cell = self.questionCell;
         self.questionCell = nil;
     }
@@ -49,6 +69,18 @@
     }
  
     return cell;
+}
+
+- (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore {
+    [self.notificationCenter addObserver:self selector:@selector(avatarStoreDidUpdateContent:) name:AvatarStoreDidUpdateContentNotification object:avatarStore];
+}
+
+- (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)avatarStore {
+    [self.notificationCenter removeObserver:self name:AvatarStoreDidUpdateContentNotification object:avatarStore];
+}
+
+- (void)avatarStoreDidUpdateContent:(NSNotification *)notification {
+    [self.tableView reloadData];
 }
 
 @end

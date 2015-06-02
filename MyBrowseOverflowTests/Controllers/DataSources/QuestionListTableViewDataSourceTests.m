@@ -8,11 +8,50 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "QuestionListTableViewDataSource.h"
 #import "Topic.h"
 #import "Question.h"
 #import "Person.h"
 #import "QuestionSummaryTableViewCell.h"
+#import "AvatarStore.h"
+
+@interface AvatarStore (TestingExtensions)
+
+@property (nonatomic, strong) NSMutableDictionary *dataCache;
+@property (nonatomic, strong) NSMutableDictionary *communicators;
+@property (nonatomic, strong) NSNotificationCenter *notificationCenter;
+
+- (void)setData:(NSData *)data forLocation:(NSString *)location;
+- (NSUInteger)dataCacheSize;
+- (NSDictionary *)communicators;
+- (NSNotificationCenter *)notificationCenter;
+
+@end
+
+@implementation AvatarStore (TestingExtensions)
+
+@dynamic dataCache;
+@dynamic communicators;
+@dynamic notificationCenter;
+
+- (void)setData:(NSData *)data forLocation:(NSString *)location {
+    [self.dataCache setObject:data forKey:location];
+}
+
+- (NSUInteger)dataCacheSize {
+    return [[self.dataCache allKeys] count];
+}
+
+- (NSDictionary *)communicators {
+    return self.communicators;
+}
+
+- (NSNotificationCenter *)notificationCenter {
+    return self.notificationCenter;
+}
+
+@end
 
 @interface QuestionListTableViewDataSourceTests : XCTestCase
 
@@ -24,6 +63,12 @@
     NSIndexPath *_firstCell;
     Question *_question1, *_question2;
     Person *_owner;
+    AvatarStore *_avatarStore;
+    NSNotification *_receivedNotification;
+}
+
+- (void)didReceiveNotification:(NSNotification *)notification {
+    _receivedNotification = notification;
 }
 
 - (void)setUp {
@@ -36,6 +81,7 @@
     _question2 = [[Question alloc] initWithTitle:@"Question Two" date:nil score:0];
     _owner = [[Person alloc] initWithName:@"Alex Salom" avatarUrlString:@"https://www.gravatar.com/avatar/f6d542dbc5488619e1498aa6b11e1209"];
     _question1.owner = _owner;
+    _avatarStore = [[AvatarStore alloc] init];
 }
 
 - (void)tearDown {
@@ -45,6 +91,8 @@
     _question1 = nil;
     _question2 = nil;
     _owner = nil;
+    _avatarStore = nil;
+    _receivedNotification = nil;
     [super tearDown];
 }
 
@@ -71,6 +119,15 @@
 }
 
 - (void)testPlaceholderCellNotReturnedWhenQuestionsExist {
+    // given & when
+    [_iPhoneTopic addQuestion:_question1];
+    UITableViewCell *placeholderCell = [_dataSource tableView:nil cellForRowAtIndexPath:_firstCell];
+    
+    // then
+    XCTAssertNotEqualObjects(placeholderCell.textLabel.text, @"There was a problem connecting to the network.", @"The placeholder cell ought to display a placeholder message");
+}
+
+- (void)testCellPropertiesAreTheSameAsTheQuestion {
     // given
     [_iPhoneTopic addQuestion:_question1];
     
@@ -80,7 +137,24 @@
     
     // then
     XCTAssertEqualObjects(cell.titleLabel.text, @"Question One", @"Question cells display the question's title");
+    XCTAssertEqualObjects(cell.scoreLabel.text, @"2", @"Question cells display the question's score");
     XCTAssertEqualObjects(cell.nameLabel.text, @"Alex Salom", @"Question cells display owner's name");
+}
+
+- (void)testCellGetsImageFromAvatarStore {
+    // given
+    id avatarStoreMock = OCMClassMock([AvatarStore class]);
+    NSURL *imageUrl = [[NSBundle bundleForClass:[self class]] URLForResource:@"Alex_Salom" withExtension:@"png"];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+    OCMStub([avatarStoreMock dataForUrl:_question1.owner.avatarUrl]).andReturn(imageData);
+    _dataSource.avatarStore = avatarStoreMock;
+    [_iPhoneTopic addQuestion:_question1];
+    
+    // when
+    QuestionSummaryTableViewCell *cell = (QuestionSummaryTableViewCell *)[_dataSource tableView:nil cellForRowAtIndexPath:_firstCell];
+    
+    // then
+    XCTAssertNotNil(cell.avatarView.image, @"The avatar store should supply the avatar images");
 }
 
 @end

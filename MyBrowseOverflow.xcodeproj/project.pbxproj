@@ -19,6 +19,8 @@
 		3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577E1B063C6B0085EFA8 /* PersonTests.m */; };
 		3F1757821B063C700085EFA8 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757811B063C700085EFA8 /* Person.m */; };
 		3F2B1ECF1B1DD7DE00470C46 /* GravatarCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B1ECE1B1DD7DE00470C46 /* GravatarCommunicatorTests.m */; };
+		3F2B1ED21B1DDE8E00470C46 /* AvatarStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B1ED11B1DDE8E00470C46 /* AvatarStore.m */; };
+		3F2B1ED51B1DEA2600470C46 /* Alex_Salom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2B1ED31B1DE80A00470C46 /* Alex_Salom.png */; };
 		3F5D270C1B0C919B00A9907C /* QuestionBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D270B1B0C919B00A9907C /* QuestionBuilderTests.m */; };
 		3F5D270F1B0CCA1A00A9907C /* PersonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D270E1B0CCA1A00A9907C /* PersonBuilder.m */; };
 		3F64C7141B14849F0041DF74 /* TopicTableDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F64C7131B14849F0041DF74 /* TopicTableDelegateTests.m */; };
@@ -81,6 +83,9 @@
 		3F1757801B063C700085EFA8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3F1757811B063C700085EFA8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		3F2B1ECE1B1DD7DE00470C46 /* GravatarCommunicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarCommunicatorTests.m; sourceTree = "<group>"; };
+		3F2B1ED01B1DDE8E00470C46 /* AvatarStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarStore.h; sourceTree = "<group>"; };
+		3F2B1ED11B1DDE8E00470C46 /* AvatarStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarStore.m; sourceTree = "<group>"; };
+		3F2B1ED31B1DE80A00470C46 /* Alex_Salom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alex_Salom.png; sourceTree = "<group>"; };
 		3F5D270B1B0C919B00A9907C /* QuestionBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionBuilderTests.m; sourceTree = "<group>"; };
 		3F5D270D1B0CCA1A00A9907C /* PersonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonBuilder.h; sourceTree = "<group>"; };
 		3F5D270E1B0CCA1A00A9907C /* PersonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonBuilder.m; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 		3F1757481B0610AC0085EFA8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3F2B1ED31B1DE80A00470C46 /* Alex_Salom.png */,
 				3F1757491B0610AC0085EFA8 /* Info.plist */,
 				3F17574A1B0610AC0085EFA8 /* main.m */,
 			);
@@ -386,6 +392,8 @@
 				3FD8042B1B15F7E1001888B8 /* GravatarCommunicator.h */,
 				3FD8042C1B15F7E1001888B8 /* GravatarCommunicator.m */,
 				3FD8042E1B15F822001888B8 /* GravatarCommunicatorDelegate.h */,
+				3F2B1ED01B1DDE8E00470C46 /* AvatarStore.h */,
+				3F2B1ED11B1DDE8E00470C46 /* AvatarStore.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -514,6 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2B1ED51B1DEA2600470C46 /* Alex_Salom.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +576,7 @@
 				3F17574B1B0610AC0085EFA8 /* main.m in Sources */,
 				3FD804211B15CE1D001888B8 /* QuestionListTableViewDataSource.m in Sources */,
 				3F17577D1B0636E50085EFA8 /* Question.m in Sources */,
+				3F2B1ED21B1DDE8E00470C46 /* AvatarStore.m in Sources */,
 				3FD8042D1B15F7E1001888B8 /* GravatarCommunicator.m in Sources */,
 				3FA262F91B0DD47F0062ECDE /* AnswerBuilder.m in Sources */,
 				3FD804281B15E5A6001888B8 /* QuestionSummaryTableViewCell.m in Sources */,

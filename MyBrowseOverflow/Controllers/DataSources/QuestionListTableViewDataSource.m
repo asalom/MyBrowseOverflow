@@ -15,15 +15,21 @@
 
 @interface QuestionListTableViewDataSource ()
 
-@property (strong) NSNotificationCenter *notificationCenter;
-
-- (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore;
 - (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)avatarStore;
 - (void)avatarStoreDidUpdateContent:(NSNotification *)notification;
 @end
 
 
 @implementation QuestionListTableViewDataSource
+
+- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter
+{
+    self = [super init];
+    if (self) {
+        self.notificationCenter = notificationCenter;
+    }
+    return self;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 132.0f;

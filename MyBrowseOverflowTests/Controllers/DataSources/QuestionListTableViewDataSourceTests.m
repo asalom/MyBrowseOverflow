@@ -29,6 +29,11 @@
 
 @end
 
+// Silence warnings
+@interface QuestionListTableViewDataSource (PrivateApi)
+- (void)avatarStoreDidUpdateContent:(NSNotification *)notification;
+@end
+
 @implementation AvatarStore (TestingExtensions)
 
 @dynamic dataCache;
@@ -155,6 +160,18 @@
     
     // then
     XCTAssertNotNil(cell.avatarView.image, @"The avatar store should supply the avatar images");
+}
+
+- (void)testQuestionListRegistersForAvatarNotifications {
+    //given
+    id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
+    _dataSource.notificationCenter = mockNotificationCenter;
+    
+    // when
+    [_dataSource registerForUpdatesToAvatarStore:_avatarStore];
+    
+    // then
+    OCMVerify([mockNotificationCenter addObserver:_dataSource selector:@selector(avatarStoreDidUpdateContent:) name:AvatarStoreDidUpdateContentNotification object:_avatarStore]);
 }
 
 @end

@@ -30,6 +30,9 @@
                                              selector:@selector(userDidSelectTopicNotification:)
                                                  name:TopicTableDidSelectTopicNotification
                                                object:nil];
+    if ([self.dataSource isKindOfClass:[QuestionListTableViewDataSource class]]) {
+        ((QuestionListTableViewDataSource *)self.dataSource).notificationCenter = [NSNotificationCenter defaultCenter];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -16,4 +16,9 @@
 @property IBOutlet QuestionSummaryTableViewCell *questionCell;
 @property (strong) AvatarStore *avatarStore;
 @property UITableView *tableView;
+@property (strong) NSNotificationCenter *notificationCenter;
+
+- (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter;
+- (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore;
+
 @end

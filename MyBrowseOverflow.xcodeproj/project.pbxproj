@@ -18,6 +18,7 @@
 		3F17577D1B0636E50085EFA8 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577C1B0636E50085EFA8 /* Question.m */; };
 		3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F17577E1B063C6B0085EFA8 /* PersonTests.m */; };
 		3F1757821B063C700085EFA8 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1757811B063C700085EFA8 /* Person.m */; };
+		3F2B1ECF1B1DD7DE00470C46 /* GravatarCommunicatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B1ECE1B1DD7DE00470C46 /* GravatarCommunicatorTests.m */; };
 		3F5D270C1B0C919B00A9907C /* QuestionBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D270B1B0C919B00A9907C /* QuestionBuilderTests.m */; };
 		3F5D270F1B0CCA1A00A9907C /* PersonBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D270E1B0CCA1A00A9907C /* PersonBuilder.m */; };
 		3F64C7141B14849F0041DF74 /* TopicTableDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F64C7131B14849F0041DF74 /* TopicTableDelegateTests.m */; };
@@ -79,6 +80,7 @@
 		3F17577E1B063C6B0085EFA8 /* PersonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonTests.m; sourceTree = "<group>"; };
 		3F1757801B063C700085EFA8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3F1757811B063C700085EFA8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		3F2B1ECE1B1DD7DE00470C46 /* GravatarCommunicatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GravatarCommunicatorTests.m; sourceTree = "<group>"; };
 		3F5D270B1B0C919B00A9907C /* QuestionBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionBuilderTests.m; sourceTree = "<group>"; };
 		3F5D270D1B0CCA1A00A9907C /* PersonBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonBuilder.h; sourceTree = "<group>"; };
 		3F5D270E1B0CCA1A00A9907C /* PersonBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonBuilder.m; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				3F5D270A1B0C918B00A9907C /* Builders */,
 				3FC6D2781B0A1F120013A0A2 /* QuestionCreationWorkflowTests.m */,
 				3FA262FC1B0DE8C20062ECDE /* StackOverflowCommunicatorTests.m */,
+				3F2B1ECE1B1DD7DE00470C46 /* GravatarCommunicatorTests.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				3F17577F1B063C6B0085EFA8 /* PersonTests.m in Sources */,
 				3F1757741B06256E0085EFA8 /* TopicTests.m in Sources */,
 				3FBA269D1B0F4BF900B65F33 /* BrowseOverflowViewControllerTests.m in Sources */,
+				3F2B1ECF1B1DD7DE00470C46 /* GravatarCommunicatorTests.m in Sources */,
 				3F17577A1B06366C0085EFA8 /* QuestionTests.m in Sources */,
 				3F5D270C1B0C919B00A9907C /* QuestionBuilderTests.m in Sources */,
 				3FA263051B0E139E0062ECDE /* NoNetworkedStackOverflowCommunicator.m in Sources */,

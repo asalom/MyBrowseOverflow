@@ -174,4 +174,17 @@
     OCMVerify([mockNotificationCenter addObserver:_dataSource selector:@selector(avatarStoreDidUpdateContent:) name:AvatarStoreDidUpdateContentNotification object:_avatarStore]);
 }
 
+- (void)testQuestionListStopsRegisteringForAvatarNotifications {
+    //given
+    id mockNotificationCenter = OCMClassMock([NSNotificationCenter class]);
+    _dataSource.notificationCenter = mockNotificationCenter;
+    
+    // when
+    [_dataSource registerForUpdatesToAvatarStore:_avatarStore];
+    [_dataSource removeObservationOfUpdatesToAvatarStore:_avatarStore];
+    
+    // then
+    OCMVerify([mockNotificationCenter removeObserver:_dataSource name:AvatarStoreDidUpdateContentNotification object:_avatarStore]);
+}
+
 @end

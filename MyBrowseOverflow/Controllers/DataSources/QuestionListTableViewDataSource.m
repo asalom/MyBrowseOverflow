@@ -15,7 +15,7 @@
 
 @interface QuestionListTableViewDataSource ()
 
-- (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)avatarStore;
+
 - (void)avatarStoreDidUpdateContent:(NSNotification *)notification;
 @end
 

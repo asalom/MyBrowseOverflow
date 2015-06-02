@@ -20,5 +20,6 @@
 
 - (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter;
 - (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore;
+- (void)removeObservationOfUpdatesToAvatarStore:(AvatarStore *)avatarStore;
 
 @end

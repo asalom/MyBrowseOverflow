@@ -26,6 +26,8 @@
 		3F63C1BE1B1EFEC7004BAD51 /* BrowseOverflowAppDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F63C1BD1B1EFEC7004BAD51 /* BrowseOverflowAppDelegateTests.m */; };
 		3F63C1C11B1F1D93004BAD51 /* BrowseOverflowObjectConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F63C1C01B1F1D93004BAD51 /* BrowseOverflowObjectConfiguration.m */; };
 		3F63C1C31B1F1DA4004BAD51 /* BrowseOverflowObjectConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F63C1C21B1F1DA4004BAD51 /* BrowseOverflowObjectConfigurationTests.m */; };
+		3F63C1C41B1F3446004BAD51 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F17575A1B0610AC0085EFA8 /* LaunchScreen.xib */; };
+		3F63C1C51B1F3451004BAD51 /* BrowseOverflowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA26991B0F490500B65F33 /* BrowseOverflowViewController.m */; };
 		3F64C7141B14849F0041DF74 /* TopicTableDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F64C7131B14849F0041DF74 /* TopicTableDelegateTests.m */; };
 		3F6547421B0B4E9A0016B5E9 /* QuestionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6547411B0B4E9A0016B5E9 /* QuestionBuilder.m */; };
 		3F6547461B0B6BC80016B5E9 /* FakeQuestionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6547451B0B6BC80016B5E9 /* FakeQuestionBuilder.m */; };
@@ -533,6 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F63C1C41B1F3446004BAD51 /* LaunchScreen.xib in Resources */,
 				3F2B1ED51B1DEA2600470C46 /* Alex_Salom.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +619,7 @@
 				3F63C1C31B1F1DA4004BAD51 /* BrowseOverflowObjectConfigurationTests.m in Sources */,
 				3F64C7141B14849F0041DF74 /* TopicTableDelegateTests.m in Sources */,
 				3FC6D2821B0A22510013A0A2 /* MockStackOverflowManagerDelegate.m in Sources */,
+				3F63C1C51B1F3451004BAD51 /* BrowseOverflowViewController.m in Sources */,
 				3FBA26901B0F183100B65F33 /* FakeUrlResponse.m in Sources */,
 				3FBA26A91B0F630400B65F33 /* TopicTableDataSourceTests.m in Sources */,
 				3F6547461B0B6BC80016B5E9 /* FakeQuestionBuilder.m in Sources */,

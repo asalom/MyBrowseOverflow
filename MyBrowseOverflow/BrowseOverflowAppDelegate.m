@@ -7,17 +7,31 @@
 //
 
 #import "BrowseOverflowAppDelegate.h"
+#import "TopicTableViewDataSource.h"
+#import "BrowseOverflowViewController.h"
+#import "Topic.h"
 
 @interface BrowseOverflowAppDelegate ()
-
+@property (readonly) NSArray *topics;
 @end
 
 @implementation BrowseOverflowAppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    BrowseOverflowViewController *viewController = (BrowseOverflowViewController *)((UINavigationController *)self.window.rootViewController).topViewController;
+    TopicTableViewDataSource *dataSource = [TopicTableViewDataSource new];
+    dataSource.topics = self.topics;
+    viewController.dataSource = dataSource;
     return YES;
+}
+
+- (NSArray *)topics {
+    return @[
+             [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"],
+             [[Topic alloc] initWithName:@"Cocoa Touch" tag:@"cocoa-touch"],
+             [[Topic alloc] initWithName:@"UIKit" tag:@"uikit"]
+             ];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

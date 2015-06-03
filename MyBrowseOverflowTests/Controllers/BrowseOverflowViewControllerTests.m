@@ -32,7 +32,6 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) id<UITableViewDataSource> dataSource;
 @property (nonatomic, assign) id<UITableViewDelegate> delegate;
 @end
 

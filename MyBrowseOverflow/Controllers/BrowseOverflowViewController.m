@@ -70,7 +70,11 @@
 #pragma mark - StackOverflowManagerDelegate
 // Questions
 - (void)didReceiveQuestions:(NSArray *)questions {
-    NSAssert(NO, @"not implemented yet");
+    Topic *topic = ((QuestionListTableViewDataSource *)self.dataSource).topic;
+    for (Question *question in questions) {
+        [topic addQuestion:question];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)fetchingQuestionsFailedWithError:(NSError *)error {

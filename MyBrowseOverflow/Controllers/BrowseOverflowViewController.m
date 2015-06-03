@@ -10,10 +10,13 @@
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 #import "QuestionListTableViewDataSource.h"
+#import "StackOverflowManager.h"
+#import "BrowseOverflowObjectConfiguration.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) StackOverflowManager *manager;
 @end
 
 @implementation BrowseOverflowViewController
@@ -44,6 +47,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.manager = [self.objectConfiguration stackOverflowManager];
+    self.manager.delegate = self;
+    if ([self.dataSource isKindOfClass:[QuestionListTableViewDataSource class]]) {
+        Topic *selectedTopic = [(QuestionListTableViewDataSource *)self.dataSource topic];
+        [self.manager fetchQuestionsOnTopic:selectedTopic];
+    }
+}
+
 - (void)userDidSelectTopicNotification:(NSNotification *)notification {
     BrowseOverflowViewController *newController = [[BrowseOverflowViewController alloc] init];
     QuestionListTableViewDataSource *dataSource = [[QuestionListTableViewDataSource alloc] init];
@@ -52,6 +65,25 @@
     newController.dataSource = dataSource;
     newController.objectConfiguration = self.objectConfiguration;
     [self.navigationController pushViewController:newController animated:YES];
+}
+
+#pragma mark - StackOverflowManagerDelegate
+// Questions
+- (void)didReceiveQuestions:(NSArray *)questions {
+    NSAssert(NO, @"not implemented yet");
+}
+
+- (void)fetchingQuestionsFailedWithError:(NSError *)error {
+    NSAssert(NO, @"not implemented yet");
+}
+
+// Questions body
+- (void)fetchingQuestionBodyFailedWithError:(NSError *)error {
+    NSAssert(NO, @"not implemented yet");
+}
+
+- (void)didReceiveBodyForQuestion:(Question *)question {
+    NSAssert(NO, @"not implemented yet");
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "BrowseOverflowViewController.h"
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
+#import "StackOverflowManager.h"
 #import "QuestionListTableViewDataSource.h"
 #import "BrowseOverflowObjectConfiguration.h"
 #import <objc/runtime.h>
@@ -233,6 +234,22 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
     
     // then
     OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
+}
+
+- (void)testViewWillAppearOnQuestionListInitiatesALoadingOfQuestions {
+    // given
+    id mockManager = OCMClassMock([StackOverflowManager class]);
+    id mockConfiguration = OCMClassMock([BrowseOverflowObjectConfiguration class]);
+    OCMStub([mockConfiguration stackOverflowManager]).andReturn(mockManager);
+    
+    _viewController.objectConfiguration = mockConfiguration;
+    _viewController.dataSource = [[QuestionListTableViewDataSource alloc] init];
+    
+    // when
+    [_viewController viewWillAppear:YES];
+    
+    // then
+    OCMVerify([mockManager fetchQuestionsOnTopic:[OCMArg any]]);
 }
 
 @end

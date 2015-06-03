@@ -76,4 +76,9 @@
     XCTAssertNotEqual([dataSource tableView:nil numberOfRowsInSection:0], 0, @"There should be some rows to display");
 }
 
+- (void)testFirstViewControllerHasAnObjectConfiguration {
+    // then
+    XCTAssertNotNil(_topViewController.objectConfiguration, @"The view controller should have an object configuration instance");
+}
+
 @end

@@ -31,4 +31,6 @@
     XCTAssertEqualObjects(manager.communicator.delegate, manager, @"The manager is the communicator's delegate");
 }
 
+
+
 @end

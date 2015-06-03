@@ -9,6 +9,7 @@
 #import "BrowseOverflowAppDelegate.h"
 #import "TopicTableViewDataSource.h"
 #import "BrowseOverflowViewController.h"
+#import "BrowseOverflowObjectConfiguration.h"
 #import "Topic.h"
 
 @interface BrowseOverflowAppDelegate ()
@@ -23,6 +24,7 @@
     TopicTableViewDataSource *dataSource = [TopicTableViewDataSource new];
     dataSource.topics = self.topics;
     viewController.dataSource = dataSource;
+    viewController.objectConfiguration = [BrowseOverflowObjectConfiguration new];
     return YES;
 }
 

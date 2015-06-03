@@ -13,6 +13,7 @@
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 #import "QuestionListTableViewDataSource.h"
+#import "BrowseOverflowObjectConfiguration.h"
 #import <objc/runtime.h>
 
 static const char *ViewDidAppearKey = "BrowseOverflowViewControllerTestsViewDidAppearKey";
@@ -215,6 +216,23 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
     
     // then
     XCTAssertEqualObjects(questionDataSource.tableView, _tableView, @"Back-link to table view should be set in data source");
+}
+
+- (void)testSelectingTopicNotificationPassesObjectConfigurationToNewViewController {
+    // given
+    BrowseOverflowObjectConfiguration *objectConfiguration = [BrowseOverflowObjectConfiguration alloc];
+    _viewController.objectConfiguration = objectConfiguration;
+    
+    id mockNavigationController = OCMPartialMock(_navigationController);
+    OCMExpect([mockNavigationController pushViewController:[OCMArg checkWithBlock:^BOOL(BrowseOverflowViewController *obj) {
+        return obj.objectConfiguration == _viewController.objectConfiguration;
+    }] animated:YES]);
+    
+    // when
+    [_viewController userDidSelectTopicNotification:nil];
+    
+    // then
+    OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
 }
 
 @end

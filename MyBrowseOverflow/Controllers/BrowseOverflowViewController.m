@@ -50,6 +50,7 @@
     dataSource.tableView = self.tableView;
     dataSource.topic = notification.object;
     newController.dataSource = dataSource;
+    newController.objectConfiguration = self.objectConfiguration;
     [self.navigationController pushViewController:newController animated:YES];
 }
 

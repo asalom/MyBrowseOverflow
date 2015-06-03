@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @class Topic;
+@class BrowseOverflowObjectConfiguration;
 
 @interface BrowseOverflowViewController : UIViewController
 
 @property (nonatomic, strong) NSObject<UITableViewDataSource, UITableViewDelegate> *dataSource;
+@property (nonatomic, strong) BrowseOverflowObjectConfiguration *objectConfiguration;
 
 - (void)userDidSelectTopicNotification:(NSNotification *)notification;
 

@@ -136,7 +136,6 @@
     // given
     [_iPhoneTopic addQuestion:_question1];
     
-    
     // when
     QuestionSummaryTableViewCell *cell = (QuestionSummaryTableViewCell *)[_dataSource tableView:nil cellForRowAtIndexPath:_firstCell];
     

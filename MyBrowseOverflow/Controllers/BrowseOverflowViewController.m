@@ -10,10 +10,11 @@
 #import "TopicTableViewDataSource.h"
 #import "Topic.h"
 #import "QuestionListTableViewDataSource.h"
+#import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
 @property (nonatomic, assign) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) id<UITableViewDataSource, UITableViewDelegate> dataSource;
+@property (nonatomic, assign) NSObject<UITableViewDataSource, UITableViewDelegate> *dataSource;
 @end
 
 @implementation BrowseOverflowViewController
@@ -22,6 +23,10 @@
     [super viewDidLoad];
     self.tableView.dataSource = self.dataSource;
     self.tableView.delegate = self.dataSource;
+    objc_property_t tableViewProperty = class_getProperty([self.dataSource class], "tableView");
+    if (tableViewProperty) {
+        [self.dataSource setValue:self.tableView forKey:@"tableView"];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

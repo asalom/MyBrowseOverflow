@@ -206,5 +206,17 @@ static const char *ViewWillDisappearKey = "BrowseOverflowViewControllerTestsView
     OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
 }
 
+- (void)testViewControllerConnectsTableViewBacklinkInViewDidLoad {
+    // given
+    QuestionListTableViewDataSource *questionDataSource = [QuestionListTableViewDataSource new];
+    _viewController.dataSource = questionDataSource;
+    
+    // when
+    [_viewController viewDidLoad];
+    
+    // then
+    XCTAssertEqualObjects(questionDataSource.tableView, _tableView, @"Back-link to table view should be set in data source");
+}
+
 @end
 

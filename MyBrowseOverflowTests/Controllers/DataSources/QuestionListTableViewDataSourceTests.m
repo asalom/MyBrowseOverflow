@@ -52,10 +52,6 @@
     return self.communicators;
 }
 
-- (NSNotificationCenter *)notificationCenter {
-    return self.notificationCenter;
-}
-
 @end
 
 @interface QuestionListTableViewDataSourceTests : XCTestCase

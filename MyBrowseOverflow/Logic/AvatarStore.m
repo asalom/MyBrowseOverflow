@@ -15,7 +15,6 @@ NSString * const AvatarStoreDidUpdateContentNotification = @"AvatarStoreDidUpdat
 @interface AvatarStore ()
 @property (nonatomic, strong) NSMutableDictionary *dataCache;
 @property (nonatomic, strong) NSMutableDictionary *communicators;
-@property (nonatomic, strong) NSNotificationCenter *notificationCenter;
 
 @end
 

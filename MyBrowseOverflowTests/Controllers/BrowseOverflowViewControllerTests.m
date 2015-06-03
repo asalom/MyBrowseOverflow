@@ -34,6 +34,7 @@
 @implementation BrowseOverflowViewControllerTests {
     BrowseOverflowViewController *_viewController;
     BrowseOverflowObjectConfiguration *_objectConfiguration;
+    QuestionListTableViewDataSource *_topicDataSource;
     UITableView *_tableView;
     id<UITableViewDataSource, UITableViewDelegate> _dataSource;
     NSException *_testException;
@@ -51,6 +52,7 @@
     _navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
     _objectConfiguration = [BrowseOverflowObjectConfiguration new];
     _viewController.objectConfiguration = _objectConfiguration;
+    _topicDataSource = [QuestionListTableViewDataSource new];
 }
 
 - (void)tearDown {
@@ -223,10 +225,9 @@
 
 - (void)testDownloadedQuestionsAreAddedToTopic {
     // given
-    QuestionListTableViewDataSource *topicDataSource = [QuestionListTableViewDataSource new];
-    _viewController.dataSource = topicDataSource;
+    _viewController.dataSource = _topicDataSource;
     Topic *topic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
-    topicDataSource.topic = topic;
+    _topicDataSource.topic = topic;
     Question *question1 = [[Question alloc] init];
     
     // when
@@ -234,6 +235,31 @@
     
     // then
     XCTAssertEqualObjects(topic.recentQuestions.lastObject, question1, @"Question was added to the topic");
+}
+
+- (void)testTableViewReloadedWhenQuestionsReceived {
+    // given
+    _viewController.dataSource = _topicDataSource;
+    id mockTableView = OCMClassMock([UITableView class]);
+    _viewController.tableView = mockTableView;
+    
+    // when
+    [_viewController didReceiveQuestions:nil];
+    
+    // then
+    OCMVerify([mockTableView reloadData]);
+}
+
+- (void)testQuestionListViewIsGivenAnAvatarStore {
+    // given
+    QuestionListTableViewDataSource *listDataSource = [QuestionListTableViewDataSource new];
+    _viewController.dataSource = listDataSource;
+    
+    // when
+    [_viewController viewWillAppear:YES];
+    
+    // then
+    XCTAssertNotNil(listDataSource.avatarStore, @"The avatarStore property should be configured in -viewWillAppear:");
 }
 
 @end

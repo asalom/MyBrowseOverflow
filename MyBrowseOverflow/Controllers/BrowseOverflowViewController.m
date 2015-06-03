@@ -54,6 +54,7 @@
     if ([self.dataSource isKindOfClass:[QuestionListTableViewDataSource class]]) {
         Topic *selectedTopic = [(QuestionListTableViewDataSource *)self.dataSource topic];
         [self.manager fetchQuestionsOnTopic:selectedTopic];
+        ((QuestionListTableViewDataSource *)self.dataSource).avatarStore = [self.objectConfiguration avatarStore];
     }
 }
 
@@ -75,10 +76,6 @@
         [topic addQuestion:question];
     }
     [self.tableView reloadData];
-}
-
-- (void)fetchingQuestionsFailedWithError:(NSError *)error {
-    NSAssert(NO, @"not implemented yet");
 }
 
 // Questions body

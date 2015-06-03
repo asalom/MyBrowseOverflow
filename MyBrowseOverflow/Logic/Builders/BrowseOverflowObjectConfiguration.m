@@ -9,6 +9,7 @@
 #import "BrowseOverflowObjectConfiguration.h"
 #import "StackOverflowManager.h"
 #import "StackOverflowCommunicator.h"
+#import "AvatarStore.h"
 
 @implementation BrowseOverflowObjectConfiguration
 
@@ -17,6 +18,16 @@
     manager.communicator = [StackOverflowCommunicator new];
     manager.communicator.delegate = manager;
     return manager;
+}
+
+- (AvatarStore *)avatarStore {
+    static AvatarStore *avatarStore = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        avatarStore = [[AvatarStore alloc] init];
+        avatarStore.notificationCenter = [NSNotificationCenter defaultCenter];
+    });
+    return avatarStore;
 }
 
 @end

@@ -13,6 +13,8 @@ extern NSString * const AvatarStoreDidUpdateContentNotification;
 
 @interface AvatarStore : NSObject <GravatarCommunicatorDelegate>
 
+@property (nonatomic, strong) NSNotificationCenter *notificationCenter;
+
 - (NSData *)dataForUrl:(NSURL *)url;
 - (void)didReceiveMemoryWarning:(NSNotification *)notification;
 - (void)startUsingNotificationCenter:(NSNotificationCenter *)notificationCenter;

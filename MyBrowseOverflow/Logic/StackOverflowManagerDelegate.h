@@ -12,10 +12,12 @@
 
 // Questions
 - (void)didReceiveQuestions:(NSArray *)questions;
-- (void)fetchingQuestionsFailedWithError:(NSError *)error;
 
 // Questions body
 - (void)fetchingQuestionBodyFailedWithError:(NSError *)error;
 - (void)didReceiveBodyForQuestion:(Question *)question;
+
+@optional
+- (void)fetchingQuestionsFailedWithError:(NSError *)error;
 
 @end

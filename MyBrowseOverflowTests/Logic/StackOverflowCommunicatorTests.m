@@ -223,7 +223,7 @@
     _errorFromDelegate = error;
 }
 
-- (void)fetchingQuestionBodyDidWithError:(NSError *)error {
+- (void)fetchingQuestionBodyDidFailWithError:(NSError *)error {
     _errorFromDelegate = error;
 }
 

@@ -55,7 +55,7 @@
         Question *question = self.topic.recentQuestions[indexPath.row];
         self.questionCell.nameLabel.text = question.owner.name;
         self.questionCell.titleLabel.text = question.title;
-        self.questionCell.scoreLabel.text = [NSString stringWithFormat:@"%d", question.score];
+        self.questionCell.scoreLabel.text = [NSString stringWithFormat:@"%ld", (long)question.score];
         NSData *avatarData = [self.avatarStore dataForUrl:question.owner.avatarUrl];
         if (avatarData) {
             self.questionCell.avatarView.image = [UIImage imageWithData:avatarData];

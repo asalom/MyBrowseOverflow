@@ -10,6 +10,7 @@
 #import "StackOverflowCommunicator.h"
 #import "Topic.h"
 #import "QuestionBuilder.h"
+#import "AnswerBuilder.h"
 #import "Question.h"
 
 NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
@@ -23,6 +24,7 @@ NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
     self = [super init];
     if (self) {
         _questionBuilder = [[QuestionBuilder alloc] init];
+        _answerBuilder = [[AnswerBuilder alloc] init];
     }
     return self;
 }
@@ -46,11 +48,11 @@ NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
     [self.communicator downloadInformationForQuestionWithId:question.questionId];
 }
 
-- (void)searchingForQuestionsFailedWithError:(NSError *)error {
+- (void)searchingForQuestionsDidFailWithError:(NSError *)error {
     [self tellDelegateAboutQuestionSearchError:error];
 }
 
-- (void)receivedQuestionsJson:(NSString *)objectNotation {
+- (void)didReceiveQuestionsJson:(NSString *)objectNotation {
     NSError *error = nil;
     NSArray *questions = [self.questionBuilder questionsFromJson:objectNotation error:&error];
     
@@ -63,20 +65,28 @@ NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
     }
 }
 
-- (void)receivedQuestionBodyJson:(NSString *)objectNotation {
+- (void)didReceiveQuestionBodyJson:(NSString *)objectNotation {
     [self.questionBuilder fillInDetailsForQuestion:self.questionNeedingBody fromJson: objectNotation];
     [self.delegate didReceiveBodyForQuestion:self.questionNeedingBody];
     self.questionNeedingBody = nil;
 }
 
-- (void)fetchingQuestionBodyFailedWithError:(NSError *)error {
+- (void)fetchingQuestionBodyDidFailWithError:(NSError *)error {
     NSDictionary *errorInfo = nil;
     if (error) {
         errorInfo = [NSDictionary dictionaryWithObject: error forKey: NSUnderlyingErrorKey];
     }
     NSError *reportableError = [NSError errorWithDomain: StackOverflowManagerError code: StackOverflowManagerErrorQuestionBodyFetchCode userInfo:errorInfo];
-    [self.delegate fetchingQuestionBodyFailedWithError: reportableError];
+    [self.delegate fetchingQuestionBodyFailedWithError:reportableError];
     self.questionNeedingBody = nil;
+}
+
+- (void)fetchingAnswersDidFailWithError:(NSError *)error {
+    NSAssert(NO, @"Answers unimplemented: fetchingAnswersDidFailWithError:");
+}
+
+- (void)didReceiveAnswerArrayJson:(NSString *)objectNotation {
+    NSAssert(NO, @"Answers unimplemented: didReceiveAnswerArrayJson:");
 }
 
 #pragma mark Class Continuation

@@ -41,7 +41,7 @@ static NSString * const AnswersToQuestionIdURL = @"http://api.stackexchange.com/
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:BodyFromQuestionIdURL, @(questionId)]];
     [self fetchContentAtURL:url
                errorHandler:^(NSError *error) {
-                   [self.delegate fetchingQuestionBodyDidWithError:error];
+                   [self.delegate fetchingQuestionBodyDidFailWithError:error];
                }successHandler:^(NSString *objectNotiation) {
                    [self.delegate didReceiveQuestionBodyJson:objectNotiation];
                }];

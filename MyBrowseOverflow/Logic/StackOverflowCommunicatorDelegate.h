@@ -11,7 +11,7 @@
 @protocol StackOverflowCommunicatorDelegate <NSObject>
 
 - (void)searchingForQuestionsDidFailWithError:(NSError *)error;
-- (void)fetchingQuestionBodyDidWithError:(NSError *)error;
+- (void)fetchingQuestionBodyDidFailWithError:(NSError *)error;
 - (void)fetchingAnswersDidFailWithError:(NSError *)error;
 
 - (void)didReceiveQuestionsJson:(NSString *)objectNotation;

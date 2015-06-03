@@ -22,7 +22,7 @@ extern NSString * const StackOverflowCommunicatorErrorDomain;
     void (^successHandler)(NSString *);
 }
 
-@property (assign) id<StackOverflowCommunicatorDelegate> delegate;
+@property (weak) id<StackOverflowCommunicatorDelegate> delegate;
 
 - (void)searchForQuestionsWithTag:(NSString *)tag;
 - (void)downloadInformationForQuestionWithId:(NSInteger)questionId;

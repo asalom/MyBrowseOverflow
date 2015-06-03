@@ -86,7 +86,7 @@
     NSError *error = [NSError new];
     
     // when
-    [_manager searchingForQuestionsFailedWithError:error];
+    [_manager searchingForQuestionsDidFailWithError:error];
     
     // then
     XCTAssertFalse(_underlyingErrorFromDelegate == error, @"Error should be at the correct level of abstraction");
@@ -97,7 +97,7 @@
     NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     
     // when
-    [_manager searchingForQuestionsFailedWithError:error];
+    [_manager searchingForQuestionsDidFailWithError:error];
     
     // then
     XCTAssertEqualObjects([[_underlyingErrorFromDelegate userInfo] objectForKey:NSUnderlyingErrorKey], error, @"The underlying error should be available to client code");
@@ -106,7 +106,7 @@
 - (void)testQuestionJSONIsPassedToQuestionBuilder {
 
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager didReceiveQuestionsJson:@"Fake JSON"];
     
     // then
     //[_mockQuestionBuilder verify];
@@ -118,7 +118,7 @@
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(nil);
     
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager didReceiveQuestionsJson:@"Fake JSON"];
     
     // then
     XCTAssertNotNil(_underlyingErrorFromDelegate, @"The delegate should have found out about the error");
@@ -129,7 +129,7 @@
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
     
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager didReceiveQuestionsJson:@"Fake JSON"];
     
     // then
     XCTAssertNil(_underlyingErrorFromDelegate, @"No error should be reported");
@@ -140,7 +140,7 @@
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn(_questionsArray);
     
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager didReceiveQuestionsJson:@"Fake JSON"];
     
     // then
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, _questionsArray, @"The manager should have sent its questions to the delegate");
@@ -151,7 +151,7 @@
     OCMStub([_mockQuestionBuilder questionsFromJson:[OCMArg any] error:[OCMArg anyObjectRef]]).andReturn([NSArray array]);
     
     // when
-    [_manager receivedQuestionsJson:@"Fake JSON"];
+    [_manager didReceiveQuestionsJson:@"Fake JSON"];
     
     // then
     XCTAssertEqualObjects(_receivedQuestionsArrayFromDelegate, [NSArray array], @"Returning empty array is not an error");
@@ -170,7 +170,7 @@
     NSError *error = [NSError errorWithDomain:@"Test domain" code:0 userInfo:nil];
     
     // when
-    [_manager fetchingQuestionBodyFailedWithError:error];
+    [_manager fetchingQuestionBodyDidFailWithError:error];
     
     // then
     XCTAssertNotNil(_underlyingErrorFromDelegate.userInfo, @"Delegate should have found about this error");
@@ -178,7 +178,7 @@
 
 - (void)testManagerPassesRetrievedQuestionBodyToQuestionBuilder {
     // when
-    [_manager receivedQuestionBodyJson:@"Fake JSON"];
+    [_manager didReceiveQuestionBodyJson:@"Fake JSON"];
     
     // then
     OCMVerify([_mockQuestionBuilder fillInDetailsForQuestion:[OCMArg any] fromJson:@"Fake JSON"]);
@@ -187,7 +187,7 @@
 - (void)testManagerPassesQuestionItWasSentToQuestionBuilderForFillingIn {
     // when
     [_manager fetchBodyForQuestion:_questionToFetch];
-    [_manager receivedQuestionBodyJson:@"Fake JSON"];
+    [_manager didReceiveQuestionBodyJson:@"Fake JSON"];
     
     // then
     OCMVerify([_mockQuestionBuilder fillInDetailsForQuestion:_questionToFetch fromJson:[OCMArg any]]);

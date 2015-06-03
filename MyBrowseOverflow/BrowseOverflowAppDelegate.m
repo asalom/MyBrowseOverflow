@@ -30,7 +30,9 @@
     return @[
              [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"],
              [[Topic alloc] initWithName:@"Cocoa Touch" tag:@"cocoa-touch"],
-             [[Topic alloc] initWithName:@"UIKit" tag:@"uikit"]
+             [[Topic alloc] initWithName:@"UIKit" tag:@"uikit"],
+             [[Topic alloc] initWithName:@"Objective-C" tag:@"objective-c"],
+             [[Topic alloc] initWithName:@"Xcode" tag:@"xcode"]
              ];
 }
 

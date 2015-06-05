@@ -194,4 +194,16 @@
     OCMVerify([mockTableView reloadData]);
 }
 
+- (void)testHeightOfAQuestionIsAtLeastTheSameAsTheHeightOfTheCell {
+    // given
+    [_iPhoneTopic addQuestion:_question1];
+    
+    // when
+    UITableViewCell *cell = [_dataSource tableView:nil cellForRowAtIndexPath:_firstCell];
+    NSInteger height = [_dataSource tableView:nil heightForRowAtIndexPath:_firstCell];
+    
+    // then
+    XCTAssertTrue(height >= cell.frame.size.height, @"Give table enough space to draw the view.");
+}
+
 @end

@@ -25,6 +25,7 @@ enum {
 @interface StackOverflowManager : NSObject <StackOverflowCommunicatorDelegate>
 @property (assign, nonatomic) id<StackOverflowManagerDelegate> delegate;
 @property (strong) StackOverflowCommunicator *communicator;
+@property (strong) StackOverflowCommunicator *bodyCommunicator;
 @property (strong) QuestionBuilder *questionBuilder;
 @property (strong) AnswerBuilder *answerBuilder;
 @property (strong) Question *questionNeedingBody;

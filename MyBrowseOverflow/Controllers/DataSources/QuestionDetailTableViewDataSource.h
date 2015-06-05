@@ -12,9 +12,14 @@
 @class AvatarStore;
 @class AnswerTableViewCell;
 
+
+
+
 @interface QuestionDetailTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (strong) Question *question;
 @property (strong) AvatarStore *avatarStore;
+
+
 @property (weak) IBOutlet QuestionDetailTableViewCell *detailCell;
 @property (weak) IBOutlet AnswerTableViewCell *answerCell;
 @end

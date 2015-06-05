@@ -11,6 +11,8 @@
 @class QuestionSummaryTableViewCell;
 @class AvatarStore;
 
+extern NSString * const QuestionListDidSelectQuestionNotification;
+
 @interface QuestionListTableViewDataSource : NSObject <UITableViewDataSource, UITableViewDelegate>
 @property (strong) Topic *topic;
 @property IBOutlet QuestionSummaryTableViewCell *questionCell;

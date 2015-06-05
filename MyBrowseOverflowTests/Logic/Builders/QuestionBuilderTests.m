@@ -141,4 +141,8 @@ static NSString * const EmptyQuestionsJsonString = @"{\"items\":[ { } ]}";
     XCTAssertEqualObjects(_question.body, @"<p>I've been trying to find a workaround to declare @protected properties in Objective-C so only subclasses in the hierarchy can access them (read only, not write).</p>", @"The correct question body is added");
 }
 
+- (void)testEmptyQuestionsArrayDoesNotCrash {
+    XCTAssertNoThrow([_questionBuilder fillInDetailsForQuestion:_question fromJson:EmptyQuestionsJsonString], @"Don't throw if no questions are found");
+}
+
 @end

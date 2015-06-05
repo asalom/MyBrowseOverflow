@@ -30,6 +30,7 @@
     id _mockQuestionBuilder;
     Question *_questionToFetch;
     id _mockCommunicator;
+    id _mockBodyCommunicator;
 }
 
 - (void)setUp {
@@ -42,7 +43,9 @@
     _mockQuestionBuilder = OCMClassMock([QuestionBuilder class]);
     _manager.questionBuilder = _mockQuestionBuilder;
     _mockCommunicator = OCMClassMock([StackOverflowCommunicator class]);
+    _mockBodyCommunicator = OCMClassMock([StackOverflowCommunicator class]);
     _manager.communicator = _mockCommunicator;
+    _manager.bodyCommunicator = _mockBodyCommunicator;
 }
 
 - (void)tearDown {
@@ -162,7 +165,7 @@
     [_manager fetchBodyForQuestion:_questionToFetch];
     
     // then
-    OCMVerify([_mockCommunicator downloadInformationForQuestionWithId:_questionToFetch.questionId]);
+    OCMVerify([_mockBodyCommunicator downloadInformationForQuestionWithId:_questionToFetch.questionId]);
 }
 
 - (void)testDelegateNotifiedOfFailureToFetchQuestion {
@@ -191,6 +194,18 @@
     
     // then
     OCMVerify([_mockQuestionBuilder fillInDetailsForQuestion:_questionToFetch fromJson:[OCMArg any]]);
+}
+
+- (void)testManagerNotifiesDelegateWhenQuestionBodyIsReceived {
+    // given
+    id mockManager = OCMPartialMock(_manager);
+    OCMStub([mockManager questionNeedingBody]).andReturn(_questionToFetch);
+    
+    // when
+    [_manager didReceiveQuestionBodyJson:@"Fake JSON"];
+    
+    // then
+    XCTAssertEqualObjects(_receivedQuestionBodyFromDelegate, _questionToFetch, @"Update delegate when question body filled");
 }
 
 #pragma mark -- StackOverflowManagerDelegate

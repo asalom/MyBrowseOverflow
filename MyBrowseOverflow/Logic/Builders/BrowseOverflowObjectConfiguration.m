@@ -16,6 +16,7 @@
 - (StackOverflowManager *)stackOverflowManager {
     StackOverflowManager *manager = [StackOverflowManager new];
     manager.communicator = [StackOverflowCommunicator new];
+    manager.bodyCommunicator = [StackOverflowCommunicator new];
     manager.communicator.delegate = manager;
     return manager;
 }

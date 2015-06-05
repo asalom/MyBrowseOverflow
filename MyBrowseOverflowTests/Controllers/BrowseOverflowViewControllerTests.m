@@ -17,6 +17,7 @@
 #import "QuestionListTableViewDataSource.h"
 #import "BrowseOverflowObjectConfiguration.h"
 #import "StackOverflowManagerDelegate.h"
+#import "QuestionDetailTableViewDataSource.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -278,6 +279,20 @@
     
     // then
     XCTAssertEqualObjects(dataSource.notificationCenter, [NSNotificationCenter defaultCenter], @"The notification center should be set for QuestionListTableViewDataSource to defaulCenter");
+}
+
+- (void)testTableReloadedWhenQuestionBodyReceived {
+    // given
+    QuestionDetailTableViewDataSource *dataSource = [QuestionDetailTableViewDataSource new];
+    _viewController.dataSource = dataSource;
+    id mockTableView = OCMClassMock([UITableView class]);
+    _viewController.tableView = mockTableView;
+    
+    // when
+    [_viewController didReceiveBodyForQuestion:nil];
+    
+    // then
+    OCMVerify([mockTableView reloadData]);
 }
 
 @end

@@ -45,7 +45,7 @@ NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
 
 - (void)fetchBodyForQuestion:(Question *)question {
     self.questionNeedingBody = question;
-    [self.communicator downloadInformationForQuestionWithId:question.questionId];
+    [self.bodyCommunicator downloadInformationForQuestionWithId:question.questionId];
 }
 
 - (void)searchingForQuestionsDidFailWithError:(NSError *)error {
@@ -93,10 +93,12 @@ NSString * const StackOverflowManagerError = @"StackOverflowManagerError";
 - (void)tellDelegateAboutQuestionSearchError:(NSError *)underlyingError {
     NSDictionary *errorInfo = nil;
     if (underlyingError) {
-        errorInfo = [NSDictionary dictionaryWithObject: underlyingError forKey: NSUnderlyingErrorKey];
+        errorInfo = [NSDictionary dictionaryWithObject:underlyingError forKey: NSUnderlyingErrorKey];
     }
-    NSError *reportableError = [NSError errorWithDomain: StackOverflowManagerError code: StackOverflowManagerErrorQuestionSearchCode userInfo: errorInfo];
-    [self.delegate fetchingQuestionsFailedWithError:reportableError];
+    NSError *reportableError = [NSError errorWithDomain:StackOverflowManagerError code:StackOverflowManagerErrorQuestionSearchCode userInfo: errorInfo];
+    if ([self.delegate respondsToSelector:@selector(fetchingQuestionsFailedWithError:)]) {
+        [self.delegate fetchingQuestionsFailedWithError:reportableError];
+    }
 }
 
 @end

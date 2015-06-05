@@ -13,6 +13,8 @@
 #import "Person.h"
 #import "AvatarStore.h"
 
+NSString * const QuestionListDidSelectQuestionNotification = @"QuestionListDidSelectQuestionNotification";
+
 @interface QuestionListTableViewDataSource ()
 
 
@@ -75,6 +77,15 @@
     }
  
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.topic.recentQuestions.count > 0) {
+        NSNotification *notification = [NSNotification notificationWithName:QuestionListDidSelectQuestionNotification
+                                                                     object:self.topic.recentQuestions[indexPath.row]];
+        [self.notificationCenter postNotification: notification];
+    }
 }
 
 - (void)registerForUpdatesToAvatarStore:(AvatarStore *)avatarStore {

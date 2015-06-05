@@ -38,6 +38,7 @@
     // then
     XCTAssertNotNil(manager, @"The Stack Overflow Manager should exist");
     XCTAssertNotNil(manager.communicator, @"Manager should have a StackOverflowCommunicator");
+    XCTAssertNotNil(manager.bodyCommunicator, @"Manager should have a StackOverflowCommunicator for body requests");
     XCTAssertNotNil(manager.questionBuilder, @"Manager should have a QuestionBuilder");
     XCTAssertNotNil(manager.answerBuilder, @"Manager should have an AnswerBuilder");
     XCTAssertEqualObjects(manager.communicator.delegate, manager, @"The manager is the communicator's delegate");

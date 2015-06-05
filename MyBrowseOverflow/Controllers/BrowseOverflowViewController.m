@@ -12,6 +12,7 @@
 #import "QuestionListTableViewDataSource.h"
 #import "StackOverflowManager.h"
 #import "BrowseOverflowObjectConfiguration.h"
+#import "QuestionDetailTableViewDataSource.h"
 #import <objc/runtime.h>
 
 @interface BrowseOverflowViewController ()
@@ -40,6 +41,11 @@
     if ([self.dataSource isKindOfClass:[QuestionListTableViewDataSource class]]) {
         ((QuestionListTableViewDataSource *)self.dataSource).notificationCenter = [NSNotificationCenter defaultCenter];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(userDidSelectQuestionNotification:)
+                                                 name:QuestionListDidSelectQuestionNotification
+                                               object: nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -58,14 +64,28 @@
     }
 }
 
+#pragma mark - Notification methods
+
 - (void)userDidSelectTopicNotification:(NSNotification *)notification {
     BrowseOverflowViewController *newController = [self.storyboard instantiateViewControllerWithIdentifier:@"BrowseOverflowViewController"];
     QuestionListTableViewDataSource *dataSource = [[QuestionListTableViewDataSource alloc] init];
     dataSource.tableView = self.tableView;
     dataSource.topic = notification.object;
+    dataSource.notificationCenter = [NSNotificationCenter defaultCenter];
+    [dataSource registerForUpdatesToAvatarStore:self.objectConfiguration.avatarStore];
     newController.dataSource = dataSource;
     newController.objectConfiguration = self.objectConfiguration;
     [self.navigationController pushViewController:newController animated:YES];
+}
+
+- (void)userDidSelectQuestionNotification: (NSNotification *)notification {
+    Question *selectedQuestion = (Question *)[notification object];
+    BrowseOverflowViewController *nextViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BrowseOverflowViewController"];
+    QuestionDetailTableViewDataSource *detailDataSource = [[QuestionDetailTableViewDataSource alloc] init];
+    detailDataSource.question = selectedQuestion;
+    nextViewController.dataSource = detailDataSource;
+    nextViewController.objectConfiguration = self.objectConfiguration;
+    [[self navigationController] pushViewController:nextViewController animated: YES];
 }
 
 #pragma mark - StackOverflowManagerDelegate
@@ -84,7 +104,7 @@
 }
 
 - (void)didReceiveBodyForQuestion:(Question *)question {
-    NSAssert(NO, @"not implemented yet");
+    [self.tableView reloadData];
 }
 
 @end

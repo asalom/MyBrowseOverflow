@@ -139,9 +139,11 @@
 - (void)testSelectingTopicPushesNewViewController {
     // given
     id mockNavigationController = OCMPartialMock(_navigationController);
+    id mockViewController = OCMPartialMock(_viewController);
+    OCMStub([mockViewController storyboard]).andReturn([UIStoryboard storyboardWithName:@"Main" bundle:nil]);
     
     // when
-    [_viewController userDidSelectTopicNotification:nil];
+    [mockViewController userDidSelectTopicNotification:nil];
     
     // then
     OCMVerify([mockNavigationController pushViewController:[OCMArg isNotEqual:_viewController] animated:YES]);
@@ -153,13 +155,15 @@
     Topic *iPhoneTopic = [[Topic alloc] initWithName:@"iPhone" tag:@"iphone"];
     NSNotification *iPhoneTopicSelectedNotification = [NSNotification notificationWithName:TopicTableDidSelectTopicNotification object:iPhoneTopic];
     id mockNavigationController = OCMPartialMock(_navigationController);
+    id mockViewController = OCMPartialMock(_viewController);
+    OCMStub([mockViewController storyboard]).andReturn([UIStoryboard storyboardWithName:@"Main" bundle:nil]);
     OCMExpect([mockNavigationController pushViewController:[OCMArg checkWithBlock:^BOOL(BrowseOverflowViewController *obj) {
         return [obj.dataSource isKindOfClass:[QuestionListTableViewDataSource class]] &&
         [[(QuestionListTableViewDataSource *)obj.dataSource topic] isEqual:iPhoneTopic];
     }] animated:YES]);
     
     // when
-    [_viewController userDidSelectTopicNotification:iPhoneTopicSelectedNotification];
+    [mockViewController userDidSelectTopicNotification:iPhoneTopicSelectedNotification];
 
     // when
     OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
@@ -183,12 +187,14 @@
     _viewController.objectConfiguration = objectConfiguration;
     
     id mockNavigationController = OCMPartialMock(_navigationController);
+    id mockViewController = OCMPartialMock(_viewController);
+    OCMStub([mockViewController storyboard]).andReturn([UIStoryboard storyboardWithName:@"Main" bundle:nil]);
     OCMExpect([mockNavigationController pushViewController:[OCMArg checkWithBlock:^BOOL(BrowseOverflowViewController *obj) {
         return obj.objectConfiguration == _viewController.objectConfiguration;
     }] animated:YES]);
     
     // when
-    [_viewController userDidSelectTopicNotification:nil];
+    [mockViewController userDidSelectTopicNotification:nil];
     
     // then
     OCMVerifyAll(mockNavigationController); // We should define the verify expectation here but it does not work. The block returns unpredictable objects if we verify directly here but it does work correctly if we set the expectactions beforehand
@@ -260,6 +266,18 @@
     
     // then
     XCTAssertNotNil(listDataSource.avatarStore, @"The avatarStore property should be configured in -viewWillAppear:");
+}
+
+- (void)testViewControllerHooksUpQuestionListNotificationCenterInViewDidAppear {
+    // given
+    QuestionListTableViewDataSource *dataSource = [QuestionListTableViewDataSource new];
+    _viewController.dataSource = dataSource;
+    
+    // when
+    [_viewController viewDidAppear:YES];
+    
+    // then
+    XCTAssertEqualObjects(dataSource.notificationCenter, [NSNotificationCenter defaultCenter], @"The notification center should be set for QuestionListTableViewDataSource to defaulCenter");
 }
 
 @end

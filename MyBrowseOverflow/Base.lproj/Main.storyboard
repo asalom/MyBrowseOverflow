@@ -23,7 +23,7 @@
         <!--Browse Overflow View Controller-->
         <scene sceneID="NrP-S0-WqI">
             <objects>
-                <viewController id="YA9-ow-Ytb" customClass="BrowseOverflowViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowseOverflowViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YA9-ow-Ytb" customClass="BrowseOverflowViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OTJ-b6-fpc"/>
                         <viewControllerLayoutGuide type="bottom" id="P41-47-gtl"/>

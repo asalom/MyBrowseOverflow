@@ -59,7 +59,7 @@
 }
 
 - (void)userDidSelectTopicNotification:(NSNotification *)notification {
-    BrowseOverflowViewController *newController = [[BrowseOverflowViewController alloc] init];
+    BrowseOverflowViewController *newController = [self.storyboard instantiateViewControllerWithIdentifier:@"BrowseOverflowViewController"];
     QuestionListTableViewDataSource *dataSource = [[QuestionListTableViewDataSource alloc] init];
     dataSource.tableView = self.tableView;
     dataSource.topic = notification.object;
